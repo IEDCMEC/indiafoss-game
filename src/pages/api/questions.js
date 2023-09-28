@@ -5,11 +5,13 @@ export default async function handler(req, res) {
     const { data, error } = await supabaseClient
       .from("questions")
       .select("id,title,hint,type,image");
+
     if (error) {
       return res.status(400).json({
         error: error.message,
       });
     }
+
     return res.status(200).json({
       data,
     });

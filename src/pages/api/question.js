@@ -7,6 +7,7 @@ export default async function handler(req, res) {
         error: "Unauthorized",
       });
     }
+
     const { data, error } = await supabaseClient
       .from("questions")
       .insert([
@@ -16,6 +17,7 @@ export default async function handler(req, res) {
           type: req.body.type,
           image: req.body.image ? req.body.image : "",
           answer: req.body.answer,
+          mark: req.body.mark,
         },
       ])
       .select("*");
@@ -25,6 +27,7 @@ export default async function handler(req, res) {
         error: error.message,
       });
     }
+
     return res.status(200).json({
       data,
     });
