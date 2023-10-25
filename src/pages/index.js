@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 import { supabaseClient } from "@/utils/supabase";
 import axios from "axios";
 import toast from "react-hot-toast";
+import Footer from "@/Components/Footer";
 
 function Home() {
   const router = useRouter();
@@ -79,17 +80,19 @@ function Home() {
       alignItems="center"
       justifyContent="center"
       height="100vh"
+      backgroundColor='#AEDEFC'
     >
       <Heading as="h1" size="2xl" mb={6}>
         Capture The Flag!
       </Heading>
       <Box
-        w="100%"
+        width={{base:'95vw', md: '100%'}}
         maxW="400px"
         p={4}
         borderWidth={1}
         borderRadius="md"
         boxShadow="md"
+        border='2px solid #190482'
       >
         <form onSubmit={handleSubmit}>
           <FormControl id="name" isRequired mb={4}>
@@ -100,6 +103,12 @@ function Home() {
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
               }
+              border='2px solid #190482'
+              sx={{
+                '&:hover':{
+                  border: '2px solid #190482'
+                }
+              }}
             />
             {validationErrors.name && (
               <Alert status="error" mt={2}>
@@ -117,6 +126,12 @@ function Home() {
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
               }
+              border='2px solid #190482'
+              sx={{
+                '&:hover':{
+                  border: '2px solid #190482'
+                }
+              }}
             />
             {validationErrors.email && (
               <Alert status="error" mt={2}>
@@ -134,6 +149,12 @@ function Home() {
               onChange={(e) =>
                 setFormData({ ...formData, phoneNumber: e.target.value })
               }
+              border='2px solid #190482'
+              sx={{
+                '&:hover':{
+                  border: '2px solid #190482'
+                }
+              }}
             />
           </FormControl>
 
@@ -142,6 +163,7 @@ function Home() {
           </Button>
         </form>
       </Box>
+      <Footer/>
     </Box>
   );
 }
