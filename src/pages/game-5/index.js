@@ -3,12 +3,15 @@ import { useRouter } from "next/router";
 
 import { supabaseClient } from "@/utils/supabase";
 
+import { useTimer } from "@/contexts/Timer";
+
 const gameAPI = "/api/game-5";
 const gameScore = 5;
 const game6URL = "/game-6";
 
 export default function Game5() {
   const router = useRouter();
+  const timer = useTimer();
 
   const [flag, setFlag] = useState("");
   const [submission, setSubmission] = useState("");
@@ -54,6 +57,7 @@ export default function Game5() {
     <div>
       <div>
         <h1>Head api</h1>
+        {timer}
       </div>
       <div>
         <p>API: /api/game-5</p>

@@ -4,12 +4,15 @@ import { useRouter } from "next/router";
 import generateUniqueFlag from "@/utils/UniqueFlag";
 import { supabaseClient } from "@/utils/supabase";
 
+import { useTimer } from "@/contexts/Timer";
+
 const game6FlagStaticPart = "flag{dskajfhsdhk";
 const gameScore = 6;
 const game7URL = "/";
 
 export default function Game6() {
   const router = useRouter();
+  const timer = useTimer();
 
   const [flag, setFlag] = useState("");
   const [submission, setSubmission] = useState("");
@@ -57,6 +60,7 @@ export default function Game6() {
     <div>
       <div>
         <h1>Check network tab</h1>
+        {timer}
       </div>
       <form>
         <label htmlFor="username">Username</label>

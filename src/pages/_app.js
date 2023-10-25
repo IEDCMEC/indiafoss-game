@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { TimerProvider } from "@/contexts/Timer";
 
 export default function App({ Component, pageProps }) {
   const theme = extendTheme({
@@ -9,8 +10,10 @@ export default function App({ Component, pageProps }) {
     },
   });
   return (
-    <ChakraProvider theme={theme}>
-      <Component {...pageProps} />
-    </ChakraProvider>
+    <TimerProvider>
+      <ChakraProvider theme={theme}>
+        <Component {...pageProps} />
+      </ChakraProvider>
+    </TimerProvider>
   );
 }
