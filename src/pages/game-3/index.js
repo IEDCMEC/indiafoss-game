@@ -42,6 +42,9 @@ export default function Game3() {
   };
 
   useEffect(() => {
+    if(window.localStorage.getItem("token") === null){
+      router.push("/")
+    }
     document.cookie = `flag=${flag};path=/game-3`;
   }, [flag]);
 

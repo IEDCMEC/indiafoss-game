@@ -11,6 +11,8 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { supabaseClient } from "@/utils/supabase";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 function Home() {
   const router = useRouter();
@@ -54,23 +56,11 @@ function Home() {
     ) {
       setValidationErrors(newValidationErrors);
     } else {
-      const { data, error } = await supabaseClient
-        .from("players")
-        .upsert([
-          {
-            name: formData.name,
-            email: formData.email,
-            phone_number: formData.phoneNumber,
-          },
-        ])
-        .select(`*`);
-
-      document.cookie = `TheGameUserID=${data[0].id};path=/`;
-
-      if (error) {
-        console.log(error);
+      const res = await axios.post("/api/register", formData);
+      if(res.status === 409){
+        toast.error(res.data.error)
       }
-
+      window.localStorage.setItem("token", res.data.token);
       router.push("/game-1");
     }
   };

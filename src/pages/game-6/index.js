@@ -42,11 +42,9 @@ export default function Game6() {
   };
 
   useEffect(() => {
-    const userId = document.cookie["TheGameUserID"];
-    console.log({ userId });
-    if (!userId || userId === "" || userId === "undefined") {
-      // router.push("/");
-    }
+      if(window.localStorage.getItem("token") === null){
+        router.push("/")
+      }
     fetchUniqueFlag();
   }, []);
 
