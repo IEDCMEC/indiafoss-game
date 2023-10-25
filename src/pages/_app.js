@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }) {
   return (
     <TimerProvider>
       <ChakraProvider theme={theme}>
-      <Toaster />
+        <Toaster position="top-right"/>
         <Component {...pageProps} />
       </ChakraProvider>
     </TimerProvider>

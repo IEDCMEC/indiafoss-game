@@ -7,9 +7,9 @@ export default async function handler(req, res) {
       body: { name, email, phoneNumber },
     } = req;
 
-    if (!name || !email || !phoneNumber) {
+    if (!name || !email ) {
       return res.status(400).json({
-        error: "Missing name, email, or phone number",
+        error: "Missing name or email",
       });
     }
 
@@ -22,7 +22,7 @@ export default async function handler(req, res) {
           phone_number: phoneNumber,
         },
       ])
-      .select("name, email");
+      .select("id,name, email");
 
     const secret = process.env.SECRET
     const token = jwt.sign(email,secret)
@@ -31,8 +31,8 @@ export default async function handler(req, res) {
       if (
         error.message.includes("duplicate key value violates unique constraint")
       ) {
-        return res.status(409).json({
-          error: "Email/ Phone Number already exists",
+        return res.status(200).json({
+          isRegistered: true,
         });
       }
     }
@@ -40,6 +40,7 @@ export default async function handler(req, res) {
     return res.status(200).json({
       data:data,
       token: token,
+      isRegistered: false,
     });
   } else {
     return res.status(405).json({

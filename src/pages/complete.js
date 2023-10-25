@@ -45,6 +45,7 @@ function Complete() {
         <Button
           onClick={() => {
             window.localStorage.removeItem("token");
+            window.localStorage.removeItem("timer");
             router.replace("/");
           }}
         >
