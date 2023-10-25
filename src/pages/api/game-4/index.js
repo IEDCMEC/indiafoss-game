@@ -9,9 +9,18 @@ export default function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const newFlag = generateUniqueFlag();
+  const cookies = req.headers.cookie;
 
-  const flag = `${game4FlagStaticPart}${newFlag}}}}`;
+  const cookieObj = cookies.split(";").reduce((acc, cookie) => {
+    const [name, value] = cookie.trim().split("=");
+    acc[name] = value;
+    return acc;
+  }, {});
+
+  const userId = cookieObj["TheGameUserID"];
+  const newFlag = generateUniqueFlag(userId);
+
+  const flag = `${game4FlagStaticPart}${newFlag}}`;
 
   return res.status(200).json({ flag: flag });
 }
