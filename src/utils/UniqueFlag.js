@@ -1,5 +1,6 @@
-const generateUniqueFlag = () => {
-  return Math.random().toString(36);
+const generateUniqueFlag = (userId) => {
+  return btoa(userId);
 };
 
 export default generateUniqueFlag;
+

@@ -10,6 +10,7 @@ import {
   AlertIcon,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import { supabaseClient } from "@/utils/supabase";
 
 function Home() {
   const router = useRouter();
@@ -26,7 +27,7 @@ function Home() {
     phoneNumber: "",
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Perform validation here (e.g., check if email is valid, etc.)
@@ -53,9 +54,24 @@ function Home() {
     ) {
       setValidationErrors(newValidationErrors);
     } else {
-      // Submit the form data or perform further actions
-      // You can send the data to your backend here
-      router.replace("/game");
+      const { data, error } = await supabaseClient
+        .from("players")
+        .upsert([
+          {
+            name: formData.name,
+            email: formData.email,
+            phone_number: formData.phoneNumber,
+          },
+        ])
+        .select(`*`);
+
+      document.cookie = `TheGameUserID=${data[0].id};path=/`;
+
+      if (error) {
+        console.log(error);
+      }
+
+      router.push("/game-1");
     }
   };
 
