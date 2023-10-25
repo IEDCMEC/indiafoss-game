@@ -10,6 +10,9 @@ import {
   AlertIcon,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import { supabaseClient } from "@/utils/supabase";
+import axios from "axios";
+import toast from "react-hot-toast";
 import Footer from "@/Components/Footer";
 
 function Home() {
@@ -27,7 +30,7 @@ function Home() {
     phoneNumber: "",
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Perform validation here (e.g., check if email is valid, etc.)
@@ -43,20 +46,24 @@ function Home() {
       newValidationErrors.email = "Invalid email format";
     }
 
-    if (!formData.phoneNumber) {
-      newValidationErrors.phoneNumber = "Phone number is required";
-    }
-
     if (
       newValidationErrors.name ||
-      newValidationErrors.email ||
-      newValidationErrors.phoneNumber
+      newValidationErrors.email
     ) {
       setValidationErrors(newValidationErrors);
     } else {
-      // Submit the form data or perform further actions
-      // You can send the data to your backend here
-      router.replace("/game");
+      const res = await axios.post("/api/register", formData);
+      if(res.data.isRegistered === true){
+        toast.error("Email Already Used.");
+        setFormData({
+          name: "",
+          email: "",
+          phoneNumber: "",
+        });
+        return;
+      }
+      window.localStorage.setItem("token", res.data.token);
+      router.push("/game-1");
     }
   };
 
@@ -134,7 +141,7 @@ function Home() {
             )}
           </FormControl>
 
-          <FormControl id="phoneNumber" isRequired mb={4}>
+          <FormControl id="phoneNumber" mb={4}>
             <FormLabel>Phone Number</FormLabel>
             <Input
               type="text"
@@ -149,12 +156,6 @@ function Home() {
                 }
               }}
             />
-            {validationErrors.phoneNumber && (
-              <Alert status="error" mt={2}>
-                <AlertIcon />
-                {validationErrors.phoneNumber}
-              </Alert>
-            )}
           </FormControl>
 
           <Button type="submit" colorScheme="teal" w={"100%"}>
