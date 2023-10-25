@@ -3,7 +3,11 @@ import generateUniqueFlag from "@/utils/UniqueFlag";
 
 
 export default function Game4() {
-  
+  useEffect(() => {
+    if(window.localStorage.getItem("token") === null){
+      router.push("/")
+    }
+  }, []);
 
   return (
     <div>

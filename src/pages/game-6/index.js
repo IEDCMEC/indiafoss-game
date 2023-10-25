@@ -13,6 +13,9 @@ export default function Game6() {
   };
 
   useEffect(() => {
+      if(window.localStorage.getItem("token") === null){
+        router.push("/")
+      }
     fetchUniqueFlag();
   }, []);
 

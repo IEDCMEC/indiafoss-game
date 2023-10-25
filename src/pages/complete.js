@@ -42,7 +42,14 @@ function Complete() {
         <Text fontSize="lg" mb={6}>
           We appreciate your participation in our game.
         </Text>
-        <Button onClick={() => router.replace("/")}>Return to Homepage</Button>
+        <Button
+          onClick={() => {
+            window.localStorage.removeItem("token");
+            router.replace("/");
+          }}
+        >
+          Return to Homepage
+        </Button>
       </Box>
     </>
   );
