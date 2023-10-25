@@ -29,7 +29,7 @@ export default function Game6() {
       const userId = document.cookie["TheGameUserID"];
       const { data, error } = await supabaseClient
         .from("players")
-        .update({ score: gameScore })
+        .update({ score: gameScore, time_taken: 600 - timer })
         .eq("id", 20);
 
       if (error) {
