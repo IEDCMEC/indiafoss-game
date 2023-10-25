@@ -45,20 +45,21 @@ function Home() {
       newValidationErrors.email = "Invalid email format";
     }
 
-    if (!formData.phoneNumber) {
-      newValidationErrors.phoneNumber = "Phone number is required";
-    }
-
     if (
       newValidationErrors.name ||
-      newValidationErrors.email ||
-      newValidationErrors.phoneNumber
+      newValidationErrors.email
     ) {
       setValidationErrors(newValidationErrors);
     } else {
       const res = await axios.post("/api/register", formData);
-      if(res.status === 409){
-        toast.error(res.data.error)
+      if(res.data.isRegistered === true){
+        toast.error("Email Already Used.");
+        setFormData({
+          name: "",
+          email: "",
+          phoneNumber: "",
+        });
+        return;
       }
       window.localStorage.setItem("token", res.data.token);
       router.push("/game-1");
@@ -125,7 +126,7 @@ function Home() {
             )}
           </FormControl>
 
-          <FormControl id="phoneNumber" isRequired mb={4}>
+          <FormControl id="phoneNumber" mb={4}>
             <FormLabel>Phone Number</FormLabel>
             <Input
               type="text"
@@ -134,12 +135,6 @@ function Home() {
                 setFormData({ ...formData, phoneNumber: e.target.value })
               }
             />
-            {validationErrors.phoneNumber && (
-              <Alert status="error" mt={2}>
-                <AlertIcon />
-                {validationErrors.phoneNumber}
-              </Alert>
-            )}
           </FormControl>
 
           <Button type="submit" colorScheme="teal" w={"100%"}>
