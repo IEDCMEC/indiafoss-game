@@ -26,10 +26,13 @@ export default function Game1() {
   const handleFlagSubmit = async () => {
     if (submission === flag) {
       window.alert("Correct!");
-      const userId = document.cookie["TheGameUserID"];
+      const userId = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("TheGameUserID="))
+        .split("=")[1];
       const { data, error } = await supabaseClient
         .from("players")
-        .update({ score: gameScore })
+        .update({ score: gameScore, time_taken: 600 - timer })
         .eq("id", userId);
 
       if (error) {
