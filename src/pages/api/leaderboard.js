@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   if (req.method === "GET") {
     const { data, error } = await supabaseClient
       .from("players")
-      .select("name, score")
+      .select("name, score, time_taken")
       .order("score", { ascending: false })
       .limit(20);
 
