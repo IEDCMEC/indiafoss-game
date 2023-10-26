@@ -17,7 +17,7 @@ export default function App({ Component, pageProps }) {
     <ApiContext>
       <TimerProvider>
         <ChakraProvider theme={theme}>
-          <Toaster position="top-right" />
+          <Toaster position="top-center" />
           <Head>
             <title>Game | IEDC MEC</title>
             <Script

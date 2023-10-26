@@ -19,8 +19,8 @@ export default async function handler(req, res) {
     let newFlag = generateUniqueFlag(userId[0].id.toString());
    
     if (flag != `${game1FlagStaticPart}${newFlag}}`) {
-      return res.status(500).json({
-        error: "wrong flag!",
+      return res.status(204).json({
+        error: "Wrong Flag !",
       });
     }
     const { data, error } = await supabaseClient

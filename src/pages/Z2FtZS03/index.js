@@ -35,7 +35,11 @@ export default function Game7() {
     });
 
     if (res.status == 200) {
+      toast.success("Correct Flag!!");
       router.replace(game8URL);
+    } else if (res.status == 204) {
+      toast.error("Wrong Flag!!");
+      setSubmission("");
     }
   };
 

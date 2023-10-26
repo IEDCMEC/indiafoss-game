@@ -9,6 +9,7 @@ import { Button } from "@chakra-ui/react";
 import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
 import axios from "axios";
+import toast from "react-hot-toast";
 const gameAPI = "/api/Z2FtZS01/";
 const gameScore = 5;
 const game6URL = "/Z2FtZS02";
@@ -29,7 +30,13 @@ export default function Game5() {
     });
 
     if (res.status == 200) {
+      toast.success("Correct Flag!!");
       router.replace(game6URL);
+    }
+    else if(res.status==204)
+    {
+      toast.error("Wrong Flag!!");
+      setSubmission("")
     }
   };
 

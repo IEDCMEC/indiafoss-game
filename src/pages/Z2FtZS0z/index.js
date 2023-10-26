@@ -10,6 +10,7 @@ import { useTimer } from "@/contexts/Timer";
 import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const game3FlagStaticPart = "flag{dfsafewcvascd";
 const gameScore = 3;
@@ -37,7 +38,13 @@ export default function Game3() {
     });
 
     if (res.status == 200) {
+      toast.success("Correct Flag!!");
       router.replace(game4URL);
+    }
+    else if(res.status==204)
+    {
+      toast.error("Wrong Flag!!");
+      setSubmission("")
     }
   };
 

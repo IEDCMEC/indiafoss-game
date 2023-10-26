@@ -21,8 +21,8 @@ export default async function handler(req, res) {
     const expectedFlag = expectedFlagRes.headers.get("flag");
 
     if (flag != `${expectedFlag}`) {
-      return res.status(500).json({
-        error: "wrong flag!",
+      return res.status(204).json({
+        error: "Wrong Flag !",
       });
     }
 

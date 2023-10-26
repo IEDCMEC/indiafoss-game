@@ -42,7 +42,13 @@ export default function Game6() {
     });
 
     if (res.status == 200) {
+      toast.success("Correct Flag!!");
       router.replace(game7URL);
+    }
+    else if(res.status==204)
+    {
+      toast.error("Wrong Flag!!");
+      setSubmission("")
     }
   };
 

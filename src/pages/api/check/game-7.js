@@ -19,8 +19,8 @@ export default async function handler(req, res) {
       .select("*");
 
     if (flag != expectedFlag[0].flag) {
-      return res.status(500).json({
-        error: "wrong flag!",
+      return res.status(204).json({
+        error: "Wrong Flag !",
       });
     }
     const { data, error } = await supabaseClient

@@ -8,6 +8,7 @@ import { useTimer } from "@/contexts/Timer";
 import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const gameAPI = "/api/Z2FtZS00/";
 const gameScore = 4;
@@ -39,7 +40,13 @@ export default function Game4() {
     });
 
     if (res.status == 200) {
+      toast.success("Correct Flag!!");
       router.replace(game5URL);
+    }
+    else if(res.status==204)
+    {
+      toast.error("Wrong Flag!!");
+      setSubmission("")
     }
     // } else {
     //   window.alert("Incorrect!");
