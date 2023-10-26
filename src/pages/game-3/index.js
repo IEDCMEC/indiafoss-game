@@ -35,9 +35,6 @@ export default function Game3() {
         .update({ score: gameScore, time_taken: 600 - timer })
         .eq("id", userId);
 
-      if (error) {
-        console.log(error);
-      }
       router.push(game4URL);
     } else {
       window.alert("Incorrect!");
@@ -53,7 +50,7 @@ export default function Game3() {
 
   useEffect(() => {
     const userId = document.cookie["TheGameUserID"];
-    console.log({ userId });
+
     if (!userId || userId === "" || userId === "undefined") {
       // router.push("/");
     }

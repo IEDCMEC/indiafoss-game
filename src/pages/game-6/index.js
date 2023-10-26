@@ -35,9 +35,6 @@ export default function Game6() {
         .update({ score: gameScore, time_taken: 600 - timer })
         .eq("id", 20);
 
-      if (error) {
-        console.log(error);
-      }
       router.push(game7URL);
     } else {
       window.alert("Incorrect!");

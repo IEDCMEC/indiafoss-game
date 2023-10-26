@@ -35,9 +35,6 @@ export default function Game1() {
         .update({ score: gameScore, time_taken: 600 - timer })
         .eq("id", userId  );
 
-      if (error) {
-        console.log(error);
-      }
        router.replace(game2URL);
     } else {
       window.alert("Incorrect!");

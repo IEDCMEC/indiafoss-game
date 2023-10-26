@@ -26,7 +26,6 @@ export default function Game5() {
     });
 
     const flag = data.headers.get("flag");
-    console.log({ flag });
     setFlag(flag);
   };
 
@@ -39,9 +38,6 @@ export default function Game5() {
         .update({ score: gameScore, time_taken: 600 - timer })
         .eq("id", userId);
 
-      if (error) {
-        console.log(error);
-      }
       router.push(game6URL);
     } else {
       window.alert("Incorrect!");
