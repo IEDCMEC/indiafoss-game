@@ -12,6 +12,7 @@ const Navbar = ({gamename}) => {
         // console.log(data)
     }, [])
     const timer = useTimer();
+    // console.log(timer)
   return (
     <Flex
       justify="space-between"
@@ -32,7 +33,7 @@ const Navbar = ({gamename}) => {
         </Heading>
       </Box>
       <Box>
-        <Text fontSize='1.3rem'>Time left: {timer} s</Text>
+        <Text fontSize='1.3rem'>Time left: {timer.timer} s</Text>
         <Flex alignItems="center">
           <Avatar size="sm" name={data.name} src="/avatar.jpg" mr={2} />
           <Text fontSize="sm">{data.email}</Text>

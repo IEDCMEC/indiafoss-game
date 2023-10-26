@@ -164,7 +164,11 @@ function Home() {
             />
           </FormControl>
 
-          <Button type="submit" backgroundColor="#094074" color="white" w={"100%"}>
+          <Button type="submit" backgroundColor="#094074" sx={{
+            '&:hover':{
+              backgroundColor:"#094074"
+            }
+          }} color="white" w={"100%"}>
             Play Game
           </Button>
         </form>
