@@ -14,7 +14,7 @@ const game8URL = "/";
 
 export default function Game7() {
   const router = useRouter();
-  const timer = useTimer();
+  const {timer} = useTimer();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

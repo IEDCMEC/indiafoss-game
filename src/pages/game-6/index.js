@@ -15,7 +15,7 @@ const game7URL = "/";
 
 export default function Game6() {
   const router = useRouter();
-  const timer = useTimer();
+  const {timer} = useTimer();
 
   const [flag, setFlag] = useState("");
   const [submission, setSubmission] = useState("");

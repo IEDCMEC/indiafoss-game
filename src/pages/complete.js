@@ -1,8 +1,14 @@
 import { Box, Heading, Text, Button, Flex, Avatar } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
+import { useContext } from "react";
+import { useTimer } from "@/contexts/Timer";
+
 function Complete() {
   const router = useRouter();
+const { setSeconds } = useTimer();
+// console.log(useTimer())
+
   return (
     <>
       <Flex
@@ -45,7 +51,9 @@ function Complete() {
         <Button
           onClick={() => {
             window.localStorage.removeItem("token");
-            window.localStorage.removeItem("timer");
+            window.localStorage.setItem("progressing", false);
+            window.localStorage.setItem("timer", 600);
+            setSeconds(600);
             router.replace("/");
           }}
         >
