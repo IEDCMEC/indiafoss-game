@@ -13,45 +13,29 @@ const gameScore = 5;
 const game6URL = "/game-6";
 
 export default function Game5() {
-
   const router = useRouter();
-  const {timer} = useTimer();
+  const { timer } = useTimer();
 
-  const [flag, setFlag] = useState("");
   const [submission, setSubmission] = useState("");
 
-  const fetchUniqueFlag = async () => {
-    const data = await fetch(gameAPI, {
-      method: "HEAD",
-    });
-
-    const flag = data.headers.get("flag");
-    setFlag(flag);
-  };
-
   const handleFlagSubmit = async (e) => {
-    e.preventDefault()
-    if (submission === flag) {
-      toast.success("Correct Flag!!")
+    e.preventDefault();
       const res = await axios.post("/api/check/game-5", {
         authToken: window.localStorage.getItem("token"),
         score: gameScore,
+        flag:submission,
         timeTaken: 600 - timer,
       });
 
       if (res.status == 200) {
         router.replace(game6URL);
       }
-    } else {
-      window.alert("Incorrect!");
-    }
-  };
+    };
 
   useEffect(() => {
-      if(window.localStorage.getItem("token") === null){
-        router.replace("/")
-      }
-    fetchUniqueFlag();
+    if (window.localStorage.getItem("token") === null) {
+      router.replace("/");
+    }
   }, []);
 
   return (
@@ -64,7 +48,7 @@ export default function Game5() {
       alignItems="center"
       justifyContent="center"
     >
-      <Navbar/>
+      <Navbar />
       <Box
         flexDirection={"column"}
         display="flex"
@@ -121,18 +105,21 @@ export default function Game5() {
               }}
             />
             <Button
-          backgroundColor="#094074" 
-          sx={{
-              '&:hover':{
-              backgroundColor:"#094074" 
-          }
-          }} color="white" type="submit">
+              backgroundColor="#094074"
+              sx={{
+                "&:hover": {
+                  backgroundColor: "#094074",
+                },
+              }}
+              color="white"
+              type="submit"
+            >
               Submit
             </Button>
           </Box>
         </form>
       </Box>
-      <Footer/>
+      <Footer />
     </Box>
   );
 }

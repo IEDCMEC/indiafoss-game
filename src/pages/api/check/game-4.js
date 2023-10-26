@@ -7,7 +7,15 @@ export default async function handler(req, res) {
     const flag = req.body.flag;
     const timeTaken = req.body.timeTaken;
     const email = await jwt.verify(token, process.env.SECRET);
+    const expectedFlagRes = await axios.get("/api/game-4");
+    const expectedFlag = expectedFlagRes.data.flag;
 
+    if (flag != `${expectedFlag}`) {
+        return res.status(500).json({
+          error: "wrong flag!",
+        });
+      }
+      
     const { data: userId } = await supabaseClient
       .from("players")
       .select("id,score")
