@@ -38,9 +38,11 @@ export default function Game1() {
     });
 
     if (res.status == 200) {
-      const newFlag = generateUniqueFlag(window.localStorage.getItem("TheGameUserId"))
-      const flagg =  `${game3FlagStaticPart}${newFlag}}`
-      document.cookie = `flag=${flagg};path=/Z2FtZS0z`;
+      const newFlag = generateUniqueFlag(
+        window.localStorage.getItem("TheGameUserId")
+      );
+      const flagg = `${game3FlagStaticPart}${newFlag}}`;
+      document.cookie = `flag=${flagg};path=/`;
       router.replace(game2URL);
     }
   };
@@ -120,7 +122,8 @@ export default function Game1() {
               fontWeight: "500",
             }}
           >
-            Explore the elements present in this site to find the hidden flag.
+            To uncover the flag, in pixels you must delve. Find your way where
+            tags and attributes dwell.{" "}
           </Text>
           {/* <p>Time Left: {timer}</p> */}
         </Box>

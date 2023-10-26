@@ -94,9 +94,16 @@ export default function Game3() {
           flexDirection={"column"}
           // mb={5}
         >
-          <Heading as="h2" size="xl">
-            Cookie check
-          </Heading>
+        <Text
+            as="h4"
+            sx={{
+              fontSize: "1.25rem",
+              textAlign: "center",
+              fontWeight: "500",
+            }}
+          >
+            Pick up the crumbs along the way on the trail to your sweet reward.
+          </Text>
           {/* <p>Time Left: {timer}</p> */}
         </Box>
         <form onSubmit={handleFlagSubmit}>

@@ -12,7 +12,7 @@ import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
 
 const gameScore = 7;
-const game8URL = "/";
+const game8URL = "/complete";
 
 export default function Game7() {
   const router = useRouter();
@@ -24,7 +24,8 @@ export default function Game7() {
   const [flag, setFlag] = useState("");
   const [submission, setSubmission] = useState("");
 
-  const handleFlagSubmit = async () => {
+  const handleFlagSubmit = async (e) => {
+    e.preventDefault();
     const { data, error } = await supabasePublicClient
       .from("flags")
       .select("*");
@@ -33,18 +34,17 @@ export default function Game7() {
 
     const flag = data[0].flag;
 
-    // if (submission === flag) {
-    //   window.alert("Correct!");
-    //   const userId = window.localStorage.getItem("TheGameUserId")
-    //   const { data, error } = await supabasePublicClient
-    //     .from("players")
-    //     .update({ score: gameScore, time_taken: 600 - timer })
-    //     .eq("id", userId);
+    if (submission === flag) {
+      const userId = window.localStorage.getItem("TheGameUserId")
+      const { data, error } = await supabasePublicClient
+        .from("players")
+        .update({ score: gameScore, time_taken: 600 - timer })
+        .eq("id", userId);
 
-    //   router.replace(game8URL);
-    // } else {
-    //   window.alert("Incorrect!");
-    // }
+      router.replace(game8URL);
+    } else {
+      window.alert("Incorrect!");
+    }
   };
 
   useEffect(() => {

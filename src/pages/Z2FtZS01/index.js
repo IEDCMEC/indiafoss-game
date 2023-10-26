@@ -81,9 +81,16 @@ export default function Game5() {
           flexDirection={"column"}
           // mb={5}
         >
-          <Heading as="h2" size="xl">
-            Head API
-          </Heading>
+         <Text
+            as="h4"
+            sx={{
+              fontSize: "1.25rem",
+              textAlign: "center",
+              fontWeight: "500",
+            }}
+          >
+            Head to a path you were already past, but alas this one's not quite like the last.
+          </Text>
           {/* <p>Time Left: {timer}</p> */}
           <p>{`API: ${gameAPI}${btoa(userId)}`}</p>
         </Box>

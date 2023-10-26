@@ -95,9 +95,17 @@ export default function Game4() {
           flexDirection={"column"}
           // mb={5}
         >
-          <Heading as="h2" size="xl">
-            API check
-          </Heading>
+          <Text
+            as="h4"
+            sx={{
+              fontSize: "1.25rem",
+              textAlign: "center",
+              fontWeight: "500",
+            }}
+          >
+            Point your eyes towards the end, there you will find your place of
+            rest.
+          </Text>
           <p>{`API: ${gameAPI}${btoa(userId)}`}</p>
         </Box>
         <form onSubmit={handleFlagSubmit}>
