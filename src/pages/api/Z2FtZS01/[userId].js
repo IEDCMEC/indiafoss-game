@@ -5,22 +5,16 @@ import generateUniqueFlag from "@/utils/UniqueFlag";
 const game5FlagStaticPart = "flag{dfsafewcvascd";
 
 export default function handler(req, res) {
+  const { userId } = req.query;
+
+  const uId = atob(userId);
+
   if (req.method !== "HEAD") {
     return res.status(405).json({ error: "You've gotta try harder mate" });
   }
 
-  // const cookies = req.headers.cookie;
+  const newFlag = generateUniqueFlag(uId);
 
-  // const cookieObj = cookies.split(";").reduce((acc, cookie) => {
-  //   const [name, value] = cookie.trim().split("=");
-  //   acc[name] = value;
-  //   return acc;
-  // }, {});
-
-  // const userId = cookieObj["TheGameUserId"];
-  // const newFlag = generateUniqueFlag(userId);
-
-  const newFlag = generateUniqueFlag();
 
   const flag = `${game5FlagStaticPart}${newFlag}}`;
 
