@@ -10,7 +10,6 @@ import {
   AlertIcon,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { supabaseClient } from "@/utils/supabase";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Footer from "@/Components/Footer";
