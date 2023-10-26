@@ -63,6 +63,7 @@ function Home() {
         return;
       }
       window.localStorage.setItem("token", res.data.token);
+      window.localStorage.setItem("TheGameUserId", res.data.data[0].id)
       router.push("/game-1");
     }
   };
