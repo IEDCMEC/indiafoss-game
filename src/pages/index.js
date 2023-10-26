@@ -88,7 +88,7 @@ function Home() {
       backgroundColor="#c2d0dd"
     >
       <Heading as="h1" size="2xl" mb={6}>
-        Capture The Flag!
+        Capture The Flag 🚩 !
       </Heading>
       <Box
         width={{base:'95vw', md: '100%'}}

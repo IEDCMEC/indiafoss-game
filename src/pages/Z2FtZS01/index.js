@@ -66,7 +66,7 @@ export default function Game5() {
         width={{ base: "95vw", sm: "400px" }}
         border="2px solid #094074"
         borderRadius={"md"}
-        padding={"30px 0"}
+        padding={"2rem"}
         minHeight="300px"
         // sx={{
         //   '&:hover':{
@@ -79,7 +79,7 @@ export default function Game5() {
           alignItems="center"
           justifyContent={"center"}
           flexDirection={"column"}
-          // mb={5}
+          mb={5}
         >
          <Text
             as="h4"

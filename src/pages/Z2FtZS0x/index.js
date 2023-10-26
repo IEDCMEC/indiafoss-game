@@ -90,7 +90,7 @@ export default function Game1() {
         border="2px solid #094074"
         borderRadius={"md"}
         // backgroundColor="white"
-        padding={"30px 0"}
+        padding={"2rem"}
         minHeight="300px"
         // sx={{
         //   '&:hover':{
@@ -103,7 +103,7 @@ export default function Game1() {
           alignItems="center"
           justifyContent={"center"}
           flexDirection={"column"}
-          // mb={5}
+          mb={5}
         >
           <Box>
             <Box>
