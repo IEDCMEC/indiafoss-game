@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Box,
   Heading,
@@ -14,22 +14,23 @@ import { supabaseClient } from "@/utils/supabase";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Footer from "@/Components/Footer";
+import { ContextProvider } from "@/contexts/ContextApi";
 
 function Home() {
   const router = useRouter();
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phoneNumber: "",
-  });
+  // const [formData, setFormData] = useState({
+  //   name: "",
+  //   email: "",
+  //   phoneNumber: "",
+  // });
 
-  const [validationErrors, setValidationErrors] = useState({
-    name: "",
-    email: "",
-    phoneNumber: "",
-  });
-
+  // const [validationErrors, setValidationErrors] = useState({
+  //   name: "",
+  //   email: "",
+  //   phoneNumber: "",
+  // });
+  const {formData, setFormData, validationErrors, setValidationErrors} = useContext(ContextProvider)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -63,6 +64,7 @@ function Home() {
         return;
       }
       window.localStorage.setItem("token", res.data.token);
+      window.localStorage.setItem("data", JSON.stringify(formData));
       router.push("/game-1");
     }
   };
@@ -80,7 +82,7 @@ function Home() {
       alignItems="center"
       justifyContent="center"
       height="100vh"
-      backgroundColor='#AEDEFC'
+      backgroundColor="#eee2e3"
     >
       <Heading as="h1" size="2xl" mb={6}>
         Capture The Flag!
@@ -92,7 +94,8 @@ function Home() {
         borderWidth={1}
         borderRadius="md"
         boxShadow="md"
-        border='2px solid #190482'
+        border="2px solid #580c1f"
+        mb={'50px'}
       >
         <form onSubmit={handleSubmit}>
           <FormControl id="name" isRequired mb={4}>
@@ -103,7 +106,7 @@ function Home() {
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
               }
-              border='2px solid #190482'
+              border="2px solid #580c1f"
               sx={{
                 '&:hover':{
                   border: '2px solid #190482'
@@ -126,7 +129,7 @@ function Home() {
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
               }
-              border='2px solid #190482'
+              border="2px solid #580c1f"
               sx={{
                 '&:hover':{
                   border: '2px solid #190482'
@@ -149,7 +152,7 @@ function Home() {
               onChange={(e) =>
                 setFormData({ ...formData, phoneNumber: e.target.value })
               }
-              border='2px solid #190482'
+              border="2px solid #580c1f"
               sx={{
                 '&:hover':{
                   border: '2px solid #190482'

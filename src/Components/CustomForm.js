@@ -15,7 +15,7 @@ const CustomForm = ({id,label, input, setInput, type}) => {
             type={type}
             value={input}
             onChange={setInput}
-            border='2px solid #190482'
+            border="2px solid #580c1f"
               sx={{
                 '&:hover':{
                   border: '2px solid #190482'

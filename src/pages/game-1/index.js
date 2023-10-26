@@ -3,11 +3,12 @@ import { useRouter } from "next/router";
 
 import generateUniqueFlag from "@/utils/UniqueFlag";
 import { supabaseClient } from "@/utils/supabase";
-
+import Navbar from "@/Components/Navbar";
 import { useTimer } from "@/contexts/Timer";
 import { Box, Button, Heading } from "@chakra-ui/react";
 import CustomForm from "@/Components/CustomForm";
-
+import Footer from "@/Components/Footer";
+import { Text } from "@chakra-ui/react";
 const game1FlagStaticPart = "flag{dskajfhsdhk";
 const gameScore = 1;
 const game2URL = "/game-3";
@@ -55,7 +56,7 @@ export default function Game1() {
 
   return (
     <Box
-      backgroundColor="#AEDEFC"
+      backgroundColor="#eee2e3"
       height="100vh"
       width="100vw"
       flexDirection={"column"}
@@ -63,6 +64,7 @@ export default function Game1() {
       alignItems="center"
       justifyContent="center"
     >
+      <Navbar />
       <Box>
         <Box>
           <Box>
@@ -78,8 +80,9 @@ export default function Game1() {
         alignItems="center"
         justifyContent="space-between"
         width={{ base: "95vw", sm: "400px" }}
-        border="2px solid #190482"
+        border="2px solid #580c1f"
         borderRadius={"md"}
+        // backgroundColor="white"
         padding={"30px 0"}
         minHeight="300px"
         // sx={{
@@ -104,10 +107,17 @@ export default function Game1() {
               </Box>
             </Box>
           </Box>
-          <Heading as="h2" size="xl">
-            HTML Inspect
-          </Heading>
-          <p>Time Left: {timer}</p>
+          <Text
+            as="h4"
+            sx={{
+              fontSize: "1.25rem",
+              textAlign:'center',
+              fontWeight:'500'
+            }}
+          >
+            Explore the elements present in this site to find the hidden flag.
+          </Text>
+          {/* <p>Time Left: {timer}</p> */}
         </Box>
         <Box></Box>
         <Box>
@@ -153,6 +163,7 @@ export default function Game1() {
           </Box>
         </form>
       </Box>
+      <Footer />
     </Box>
   );
 }

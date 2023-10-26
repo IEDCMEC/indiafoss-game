@@ -7,6 +7,8 @@ import CustomForm from "@/Components/CustomForm";
 import { Heading } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import { useTimer } from "@/contexts/Timer";
+import Navbar from "@/Components/Navbar";
+import Footer from "@/Components/Footer";
 
 const gameAPI = "/api/game-4";
 const gameScore = 4;
@@ -53,7 +55,7 @@ export default function Game4() {
 
   return (
     <Box
-      backgroundColor="#AEDEFC"
+      backgroundColor="#eee2e3"
       height="100vh"
       width="100vw"
       flexDirection={"column"}
@@ -61,13 +63,14 @@ export default function Game4() {
       alignItems="center"
       justifyContent="center"
     >
+      <Navbar/>
       <Box
         flexDirection={"column"}
         display="flex"
         alignItems="center"
         justifyContent="space-between"
         width={{ base: "95vw", sm: "400px" }}
-        border="2px solid #190482"
+        border="2px solid #580c1f"
         borderRadius={"md"}
         padding={"30px 0"}
         minHeight="300px"
@@ -87,7 +90,7 @@ export default function Game4() {
           <Heading as="h2" size="xl">
             API check
           </Heading>
-          <p>Time Left: {timer}</p>
+          {/* <p>Time Left: {timer}</p> */}
           {timer < 300 ? <p>API: /api/game-4</p> : null}
         </Box>
         <form onSubmit={handleFlagSubmit}>
@@ -122,6 +125,7 @@ export default function Game4() {
           </Box>
         </form>
       </Box>
+      <Footer/>
     </Box>
   );
 }
