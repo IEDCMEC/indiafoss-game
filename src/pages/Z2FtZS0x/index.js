@@ -39,7 +39,7 @@ export default function Game1() {
     });
 
     if (res.status == 200) {
-      toast.success("Correct Flag!!");
+      toast.success("Correct Flag 🚩!!");
       const newFlag = generateUniqueFlag(
         window.localStorage.getItem("TheGameUserId")
       );

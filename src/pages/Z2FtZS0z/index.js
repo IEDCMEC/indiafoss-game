@@ -38,7 +38,7 @@ export default function Game3() {
     });
 
     if (res.status == 200) {
-      toast.success("Correct Flag!!");
+      toast.success("Correct Flag 🚩!!");
       router.replace(game4URL);
     }
     else if(res.status==204)
