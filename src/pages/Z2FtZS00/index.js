@@ -17,6 +17,7 @@ export default function Game4() {
   const router = useRouter();
   const { timer } = useTimer();
 
+  const [userId, setUserId] = useState("");
   // const [flag, setFlag] = useState("");
   const [submission, setSubmission] = useState("");
 
@@ -50,6 +51,7 @@ export default function Game4() {
       router.replace("/");
     }
     // fetchUniqueFlag();
+    setUserId(window.localStorage.getItem("TheGameUserId"));
   }, []);
 
   useEffect(() => {
@@ -96,9 +98,7 @@ export default function Game4() {
           <Heading as="h2" size="xl">
             API check
           </Heading>
-          <p>{`API: ${gameAPI}${btoa(
-            window.localStorage.getItem("TheGameUserId")
-          )}`}</p>
+          <p>{`API: ${gameAPI}${btoa(userId)}`}</p>
         </Box>
         <form onSubmit={handleFlagSubmit}>
           <Box
