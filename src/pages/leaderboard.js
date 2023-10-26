@@ -64,7 +64,7 @@ function Leaderboard() {
             {leaderboard.data !== undefined &&
               leaderboard.data.map((value, index) => {
                 return (
-                  <Tr>
+                  <Tr key={index}>
                     <Th border={'2px solid #094074'} color='black'>{value.name}</Th>
                     <Th border={'2px solid #094074'} color='black'>{value.score}</Th>
                     <Th border={'2px solid #094074'} color='black'>{value.time_taken}</Th>
