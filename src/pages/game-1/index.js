@@ -14,33 +14,31 @@ const game2URL = "/game-3";
 
 export default function Game1() {
   const router = useRouter();
-  const timer = useTimer();
+  const {timer} = useTimer();
 
   const [flag, setFlag] = useState("");
   const [submission, setSubmission] = useState("");
 
   const fetchUniqueFlag = () => {
-    const userId = document.cookie["TheGameUserID"];
+    const userId =  window.localStorage.getItem("TheGameUserID");
     const newFlag = generateUniqueFlag(userId);
     setFlag(`${game1FlagStaticPart}${newFlag}}`);
   };
 
-  const handleFlagSubmit = async () => {
+  const handleFlagSubmit = async (e) => {
+      e.preventDefault();
     if (submission === flag) {
       window.alert("Correct!");
-      const userId = document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("TheGameUserID="))
-        .split("=")[1];
+      const userId = window.localStorage.getItem("TheGameUserId");
       const { data, error } = await supabaseClient
         .from("players")
         .update({ score: gameScore, time_taken: 600 - timer })
-        .eq("id", userId);
+        .eq("id", userId  );
 
       if (error) {
         console.log(error);
       }
-      router.push(game2URL);
+       router.replace(game2URL);
     } else {
       window.alert("Incorrect!");
     }
@@ -141,9 +139,9 @@ export default function Game1() {
             <CustomForm
               id="submission"
               type="text"
-              value={submission}
+              input={submission}
               label="Submit the flag"
-              onChange={(e) => {
+              setInput={(e) => {
                 setSubmission(e.target.value);
               }}
             />
