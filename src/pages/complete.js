@@ -66,6 +66,7 @@ function Complete() {
             window.localStorage.removeItem("TheGameUserId");
             window.localStorage.setItem("progressing", false);
             window.localStorage.setItem("timer", 600);
+            window.localStorage.removeItem("data")
             setSeconds(600);
             router.replace("/");
           }}

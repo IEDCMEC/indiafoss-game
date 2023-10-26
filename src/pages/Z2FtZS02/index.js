@@ -9,6 +9,8 @@ import { Button } from "@chakra-ui/react";
 import { useTimer } from "@/contexts/Timer";
 import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 const game6FlagStaticPart = "flag{dskajfhsdhk";
 const gameScore = 6;
@@ -31,7 +33,7 @@ export default function Game6() {
   };
 
   const handleFlagSubmit = async (e) => {
-    e, preventDefault();
+    e.preventDefault();
     if (submission === flag) {
       toast.success("Correct Flag!!");
       const res = await axios.post("/api/check/game-6", {
@@ -64,10 +66,9 @@ export default function Game6() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    if (username === "admin" && password === "admin") {
+    if (username === "iedc" && password === "iedc") {
       await fetch(`/next-page/id={${flag}}`);
-    }
-    window.alert("Invalid credentials");
+    } else window.alert("Invalid credentials");
   };
 
   return (
@@ -104,9 +105,16 @@ export default function Game6() {
           flexDirection={"column"}
           // mb={5}
         >
-          <Heading as="h2" size="xl">
-            Check network tab
-          </Heading>
+          <Text
+            as="h4"
+            sx={{
+              fontSize: "1.25rem",
+              textAlign: "center",
+              fontWeight: "500",
+            }}
+          >
+            Access granted with the organizers' heart.
+          </Text>
           {/* <p>Time Left: {timer}</p> */}
         </Box>
         <form onSubmit={handleFlagSubmit}>
