@@ -20,8 +20,8 @@ export default async function handler(req, res) {
     console.log(`${game3FlagStaticPart}${newFlag}}`);
 
     if (flag != `${game3FlagStaticPart}${newFlag}}`) {
-      return res.status(500).json({
-        error: "wrong flag!",
+      return res.status(204).json({
+        error: "Wrong Flag !",
       });
     }
 

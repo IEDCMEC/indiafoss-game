@@ -9,6 +9,7 @@ import Navbar from "@/Components/Navbar";
 import CustomForm from "@/Components/CustomForm";
 import Footer from "@/Components/Footer";
 import { Text } from "@chakra-ui/react";
+import toast from "react-hot-toast";
 const game1FlagStaticPart = "flag{dskajfhsdhk";
 const game3FlagStaticPart = "flag{dfsafewcvascd";
 
@@ -38,12 +39,18 @@ export default function Game1() {
     });
 
     if (res.status == 200) {
+      toast.success("Correct Flag!!");
       const newFlag = generateUniqueFlag(
         window.localStorage.getItem("TheGameUserId")
       );
       const flagg = `${game3FlagStaticPart}${newFlag}}`;
       document.cookie = `flag=${flagg};path=/`;
       router.replace(game2URL);
+    }
+    else if(res.status==204)
+    {
+      toast.error("Wrong Flag!!");
+      setSubmission("")
     }
   };
 
@@ -90,7 +97,7 @@ export default function Game1() {
         border="2px solid #094074"
         borderRadius={"md"}
         // backgroundColor="white"
-        padding={"30px 0"}
+        padding={"2rem"}
         minHeight="300px"
         // sx={{
         //   '&:hover':{
@@ -103,7 +110,7 @@ export default function Game1() {
           alignItems="center"
           justifyContent={"center"}
           flexDirection={"column"}
-          // mb={5}
+          mb={5}
         >
           <Box>
             <Box>

@@ -9,6 +9,7 @@ import { Button } from "@chakra-ui/react";
 import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
 import axios from "axios";
+import toast from "react-hot-toast";
 const gameAPI = "/api/Z2FtZS01/";
 const gameScore = 5;
 const game6URL = "/Z2FtZS02";
@@ -29,7 +30,13 @@ export default function Game5() {
     });
 
     if (res.status == 200) {
+      toast.success("Correct Flag!!");
       router.replace(game6URL);
+    }
+    else if(res.status==204)
+    {
+      toast.error("Wrong Flag!!");
+      setSubmission("")
     }
   };
 
@@ -66,7 +73,7 @@ export default function Game5() {
         width={{ base: "95vw", sm: "400px" }}
         border="2px solid #094074"
         borderRadius={"md"}
-        padding={"30px 0"}
+        padding={"2rem"}
         minHeight="300px"
         // sx={{
         //   '&:hover':{
@@ -79,7 +86,7 @@ export default function Game5() {
           alignItems="center"
           justifyContent={"center"}
           flexDirection={"column"}
-          // mb={5}
+          mb={5}
         >
          <Text
             as="h4"

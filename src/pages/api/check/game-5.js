@@ -18,13 +18,11 @@ export default async function handler(req, res) {
       `${process.env.BASE_URL}/api/Z2FtZS01/${btoa(userId[0]?.id)}`
     );
 
-    console.log(expectedFlagRes);
-
     const expectedFlag = expectedFlagRes.headers.get("flag");
 
     if (flag != `${expectedFlag}`) {
-      return res.status(500).json({
-        error: "wrong flag!",
+      return res.status(204).json({
+        error: "Wrong Flag !",
       });
     }
 

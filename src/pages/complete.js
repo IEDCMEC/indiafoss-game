@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { Box, Heading, Text, Button, Flex, Avatar } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import Navbar from "@/Components/Navbar";
-import { useContext } from "react";
 import { useTimer } from "@/contexts/Timer";
 import axios from "axios";
+import Footer from "@/Components/Footer";
 
 function Complete() {
   const router = useRouter();
@@ -35,44 +35,60 @@ function Complete() {
 
   return (
     <>
-      <Navbar />
       <Box
+        backgroundColor="#c2d0dd"
+        height="100vh"
+        width="100vw"
+        flexDirection={{ base: "column", md: "row" }}
         display="flex"
-        flexDirection="column"
         alignItems="center"
-        justifyContent="center"
-        height="80vh"
-        // color="teal"
+        justifyContent="space-around"
       >
-        <Heading as="h1" size="xl" mb={4} color="black">
-          Thank You for Playing!
-        </Heading>
-        <Text fontSize="lg" mb={6} color="black">
-          We appreciate your participation in our game.
-        </Text>
-        <Text fontSize="lg" mb={6} color="black">
-          {name}, your score is {score} and you took {time} seconds to complete
-        </Text>
-        <Button
-          backgroundColor="#094074"
-          sx={{
-            "&:hover": {
-              backgroundColor: "#094074",
-            },
-          }}
-          color="white"
-          onClick={() => {
-            window.localStorage.removeItem("token");
-            window.localStorage.removeItem("TheGameUserId");
-            window.localStorage.setItem("progressing", false);
-            window.localStorage.setItem("timer", 600);
-            window.localStorage.removeItem("data")
-            setSeconds(600);
-            router.replace("/");
-          }}
+        <Navbar />
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          height="80vh"
         >
-          Return to Homepage
-        </Button>
+          <Heading as="h1" size="xl" mb={4} color="black">
+            Thank You for Playing!
+          </Heading>
+          <Text fontSize="lg" mb={6} color="black">
+            We appreciate your participation in our game.
+          </Text>
+          <Text fontSize="xl" size="md" mb={4} color="black">
+            Name : <b>{name}</b>
+          </Text>
+          <Text fontSize="xl" size="md" mb={4} color="black">
+            Score : <b>{score}</b>
+          </Text>
+          <Text fontSize="xl" size="md" mb={4} color="black">
+            Time Taken : <b>{time} seconds</b>
+          </Text>
+          <Button
+            backgroundColor="#094074"
+            sx={{
+              "&:hover": {
+                backgroundColor: "#094074",
+              },
+            }}
+            color="white"
+            onClick={() => {
+              window.localStorage.removeItem("token");
+              window.localStorage.removeItem("TheGameUserId");
+              window.localStorage.setItem("progressing", false);
+              window.localStorage.setItem("timer", 600);
+              window.localStorage.removeItem("data");
+              setSeconds(600);
+              router.replace("/");
+            }}
+          >
+            Return to Homepage
+          </Button>
+        </Box>
+        <Footer />
       </Box>
     </>
   );

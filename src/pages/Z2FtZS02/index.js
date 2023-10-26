@@ -34,19 +34,21 @@ export default function Game6() {
 
   const handleFlagSubmit = async (e) => {
     e.preventDefault();
-    if (submission === flag) {
-      toast.success("Correct Flag!!");
-      const res = await axios.post("/api/check/game-6", {
-        authToken: window.localStorage.getItem("token"),
-        score: gameScore,
-        timeTaken: 600 - timer,
-      });
+    const res = await axios.post("/api/check/game-6", {
+      authToken: window.localStorage.getItem("token"),
+      flag: submission,
+      score: gameScore,
+      timeTaken: 600 - timer,
+    });
 
-      if (res.status == 200) {
-        router.replace(game7URL);
-      }
-    } else {
-      window.alert("Incorrect!");
+    if (res.status == 200) {
+      toast.success("Correct Flag!!");
+      router.replace(game7URL);
+    }
+    else if(res.status==204)
+    {
+      toast.error("Wrong Flag!!");
+      setSubmission("")
     }
   };
 
@@ -66,9 +68,15 @@ export default function Game6() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    if (username === "iedc" && password === "iedc") {
+    console.log(username, password);
+    const hiddenPassword = process.env.NEXT_PUBLIC_URL_PASSWORD;
+    if (username == hiddenPassword && password == hiddenPassword) {
       await fetch(`/next-page/id={${flag}}`);
-    } else window.alert("Invalid credentials");
+    }
+    else
+    {
+      toast.error("Wrong Credentials!");
+    }
   };
 
   return (
@@ -90,7 +98,7 @@ export default function Game6() {
         width={{ base: "95vw", sm: "400px" }}
         border="2px solid #094074"
         borderRadius={"md"}
-        padding={"30px 0"}
+        padding={"2rem"}
         minHeight="300px"
         // sx={{
         //   '&:hover':{
@@ -103,7 +111,7 @@ export default function Game6() {
           alignItems="center"
           justifyContent={"center"}
           flexDirection={"column"}
-          // mb={5}
+          mb={5}
         >
           <Text
             as="h4"
