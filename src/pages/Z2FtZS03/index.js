@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-import generateUniqueFlag from "@/utils/UniqueFlag";
 import { supabasePublicClient } from "@/utils/supabasePublic";
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import CustomForm from "@/Components/CustomForm";
 import { Heading } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import { useTimer } from "@/contexts/Timer";
 import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 const gameScore = 7;
 const game8URL = "/complete";
@@ -26,24 +27,15 @@ export default function Game7() {
 
   const handleFlagSubmit = async (e) => {
     e.preventDefault();
-    const { data, error } = await supabasePublicClient
-      .from("flags")
-      .select("*");
+    const res = await axios.post("/api/check/game-7", {
+      authToken: window.localStorage.getItem("token"),
+      flag: submission,
+      score: gameScore,
+      timeTaken: 600 - timer,
+    });
 
-    console.log({ error });
-
-    const flag = data[0].flag;
-
-    if (submission === flag) {
-      const userId = window.localStorage.getItem("TheGameUserId")
-      const { data, error } = await supabasePublicClient
-        .from("players")
-        .update({ score: gameScore, time_taken: 600 - timer })
-        .eq("id", userId);
-
+    if (res.status == 200) {
       router.replace(game8URL);
-    } else {
-      window.alert("Incorrect!");
     }
   };
 
@@ -68,10 +60,9 @@ export default function Game7() {
       .eq("username", username)
       .eq("password", password);
 
-    if (data?.length > 0) {
-      window.alert("User exists");
+    if (data.length > 0) {
     } else {
-      window.alert("User does not exist");
+      toast.error("Incorrect Credentials !");
     }
   };
 
@@ -146,9 +137,16 @@ export default function Game7() {
           flexDirection={"column"}
           mb={5}
         >
-          <Heading as="h2" size="xl">
-            Sup
-          </Heading>
+          <Text
+            as="h4"
+            sx={{
+              fontSize: "1.25rem",
+              textAlign: "center",
+              fontWeight: "500",
+            }}
+          >
+            Access granted with the organizers' heart.
+          </Text>
           {/* <p>Time Left: {timer}</p> */}
         </Box>
         <form onSubmit={handleFlagSubmit}>
@@ -221,7 +219,7 @@ export default function Game7() {
             />
             <CustomForm
               id="password"
-              type="text"
+              type="password"
               label="Password"
               value={password}
               setInput={(e) => setPassword(e.target.value)}
