@@ -34,19 +34,15 @@ export default function Game6() {
 
   const handleFlagSubmit = async (e) => {
     e.preventDefault();
-    if (submission === flag) {
-      toast.success("Correct Flag!!");
-      const res = await axios.post("/api/check/game-6", {
-        authToken: window.localStorage.getItem("token"),
-        score: gameScore,
-        timeTaken: 600 - timer,
-      });
+    const res = await axios.post("/api/check/game-6", {
+      authToken: window.localStorage.getItem("token"),
+      flag: submission,
+      score: gameScore,
+      timeTaken: 600 - timer,
+    });
 
-      if (res.status == 200) {
-        router.replace(game7URL);
-      }
-    } else {
-      window.alert("Incorrect!");
+    if (res.status == 200) {
+      router.replace(game7URL);
     }
   };
 
@@ -66,9 +62,15 @@ export default function Game6() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    if (username === "iedc" && password === "iedc") {
+    console.log(username, password);
+    const hiddenPassword = process.env.NEXT_PUBLIC_URL_PASSWORD;
+    if (username == hiddenPassword && password == hiddenPassword) {
       await fetch(`/next-page/id={${flag}}`);
-    } else window.alert("Invalid credentials");
+    }
+    else
+    {
+      toast.error("Wrong Credentials!");
+    }
   };
 
   return (
