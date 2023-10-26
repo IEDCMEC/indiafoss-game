@@ -153,7 +153,7 @@ function GamePage() {
           <Flex justify="center">
             <Button
               mt={4}
-              colorScheme="teal"
+              backgroundColor="#094074" color="white"
               onClick={handleAnswerSubmit}
               isDisabled={isAnswered}
             >

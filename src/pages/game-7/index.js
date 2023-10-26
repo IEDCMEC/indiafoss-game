@@ -8,6 +8,8 @@ import CustomForm from "@/Components/CustomForm";
 import { Heading } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import { useTimer } from "@/contexts/Timer";
+import Navbar from "@/Components/Navbar";
+import Footer from "@/Components/Footer";
 
 const gameScore = 7;
 const game8URL = "/";
@@ -100,7 +102,7 @@ export default function Game7() {
     //   </div>
     // </div>
     <Box
-      backgroundColor="#AEDEFC"
+      backgroundColor="#c2d0dd"
       height="100vh"
       width="100vw"
       flexDirection={{ base: "column", md: "row" }}
@@ -108,13 +110,14 @@ export default function Game7() {
       alignItems="center"
       justifyContent="space-around"
     >
+      <Navbar />
       <Box
         flexDirection={"column"}
         display="flex"
         alignItems="center"
         justifyContent="space-between"
         width={{ base: "95vw", sm: "400px" }}
-        border="2px solid #190482"
+        border="2px solid #094074"
         borderRadius={"md"}
         padding={"30px 0"}
         minHeight="300px"
@@ -134,7 +137,7 @@ export default function Game7() {
           <Heading as="h2" size="xl">
             Sup
           </Heading>
-          <p>Time Left: {timer}</p>
+          {/* <p>Time Left: {timer}</p> */}
         </Box>
         <form onSubmit={handleFlagSubmit}>
           <Box
@@ -162,7 +165,13 @@ export default function Game7() {
                 setSubmission(e.target.value);
               }}
             />
-            <Button colorScheme="teal" type="submit">
+            <Button
+          backgroundColor="#094074" 
+          sx={{
+              '&:hover':{
+              backgroundColor:"#094074" 
+          }
+          }} color="white" type="submit">
               Submit
             </Button>
           </Box>
@@ -175,7 +184,7 @@ export default function Game7() {
           alignItems="center"
           justifyContent="space-between"
           width={{ base: "95vw", sm: "400px" }}
-          border="2px solid #190482"
+          border="2px solid #094074"
           borderRadius={"md"}
           padding={"30px 0"}
           height="300px"
@@ -202,12 +211,19 @@ export default function Game7() {
               value={password}
               setInput={(e) => setPassword(e.target.value)}
             />
-            <Button colorScheme="teal" type="submit">
+            <Button
+          backgroundColor="#094074" 
+          sx={{
+              '&:hover':{
+              backgroundColor:"#094074" 
+          }
+          }} color="white" type="submit">
               Submit
             </Button>
           </Box>
         </Box>
       </form>
+      <Footer />
     </Box>
   );
 }
