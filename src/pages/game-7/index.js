@@ -16,7 +16,7 @@ const game8URL = "/";
 
 export default function Game7() {
   const router = useRouter();
-  const timer = useTimer();
+  const {timer} = useTimer();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -30,16 +30,13 @@ export default function Game7() {
 
     if (submission === flag) {
       window.alert("Correct!");
-      const userId = document.cookie["TheGameUserID"];
+      const userId = window.localStorage.getItem("TheGameUserID")
       const { data, error } = await supabaseClient
         .from("players")
         .update({ score: gameScore, time_taken: 600 - timer })
-        .eq("id", 20);
+        .eq("id", userId);
 
-      if (error) {
-        console.log(error);
-      }
-      router.push(game8URL);
+      router.replace(game8URL);
     } else {
       window.alert("Incorrect!");
     }
@@ -47,13 +44,12 @@ export default function Game7() {
 
   useEffect(() => {
     if (window.localStorage.getItem("token") === null) {
-      router.push("/");
+      router.replace("/");
     }
   }, []);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log({ username, password });
     const { data, error } = await supabaseClient
       .from("players")
       .select("*")
@@ -165,7 +161,7 @@ export default function Game7() {
               type="text"
               value={submission}
               label="Submit the flag"
-              onChange={(e) => {
+              setInput={(e) => {
                 setSubmission(e.target.value);
               }}
             />
@@ -206,14 +202,14 @@ export default function Game7() {
               type="text"
               label="Username"
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              setInput={(e) => setUsername(e.target.value)}
             />
             <CustomForm
               id="password"
               type="text"
               label="Password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              setInput={(e) => setPassword(e.target.value)}
             />
             <Button
           backgroundColor="#094074" 

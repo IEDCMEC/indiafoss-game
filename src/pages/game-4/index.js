@@ -16,7 +16,7 @@ const game5URL = "/game-5";
 
 export default function Game4() {
   const router = useRouter();
-  const timer = useTimer();
+  const {timer} = useTimer();
 
   const [flag, setFlag] = useState("");
   const [submission, setSubmission] = useState("");
@@ -24,23 +24,20 @@ export default function Game4() {
   const fetchUniqueFlag = async () => {
     const data = await fetch(gameAPI).then((res) => res.json());
     const { flag } = data;
-    console.log({ flag });
     setFlag(flag);
   };
 
-  const handleFlagSubmit = async () => {
+  const handleFlagSubmit = async (e) => {
+    e.preventDefault()
     if (submission === flag) {
       window.alert("Correct!");
-      const userId = document.cookie["TheGameUserID"];
+      const userId = window.localStorage.getItem("TheGameUserID")
       const { data, error } = await supabaseClient
         .from("players")
         .update({ score: gameScore, time_taken: 600 - timer })
         .eq("id", userId);
 
-      if (error) {
-        console.log(error);
-      }
-      router.push(game5URL);
+      router.replace(game5URL);
     } else {
       window.alert("Incorrect!");
     }
@@ -48,7 +45,7 @@ export default function Game4() {
 
   useEffect(() => {
     if (window.localStorage.getItem("token") === null) {
-      router.push("/");
+      router.replace("/");
     }
     fetchUniqueFlag();
   }, []);
@@ -115,7 +112,7 @@ export default function Game4() {
               type="text"
               value={submission}
               label="Submit the flag"
-              onChange={(e) => {
+              setInput={(e) => {
                 setSubmission(e.target.value);
               }}
             />

@@ -17,30 +17,28 @@ const game4URL = "/game-4";
 
 export default function Game3() {
   const router = useRouter();
-  const timer = useTimer();
+  const {timer} = useTimer();
 
   const [flag, setFlag] = useState("");
   const [submission, setSubmission] = useState("");
 
   const fetchUniqueFlag = () => {
-    const userId = document.cookie["TheGameUserID"];
+    const userId = window.localStorage.getItem("TheGameUserID")
     const newFlag = generateUniqueFlag(userId);
     setFlag(`${game3FlagStaticPart}${newFlag}}`);
   };
 
-  const handleFlagSubmit = async () => {
+  const handleFlagSubmit = async (e) => {
+    e.preventDefault();
     if (submission === flag) {
       window.alert("Correct!");
-      const userId = document.cookie["TheGameUserID"];
+      const userId = window.localStorage.getItem("TheGameUserID")
       const { data, error } = await supabaseClient
         .from("players")
         .update({ score: gameScore, time_taken: 600 - timer })
         .eq("id", userId);
 
-      if (error) {
-        console.log(error);
-      }
-      router.push(game4URL);
+      router.replace(game4URL);
     } else {
       window.alert("Incorrect!");
     }
@@ -48,17 +46,12 @@ export default function Game3() {
 
   useEffect(() => {
     if (window.localStorage.getItem("token") === null) {
-      router.push("/");
+      router.replace("/");
     }
     document.cookie = `flag=${flag};path=/game-3`;
   }, [flag]);
 
   useEffect(() => {
-    const userId = document.cookie["TheGameUserID"];
-    console.log({ userId });
-    if (!userId || userId === "" || userId === "undefined") {
-      // router.push("/");
-    }
     fetchUniqueFlag();
   }, []);
 
@@ -123,7 +116,7 @@ export default function Game3() {
             type="text"
             value={submission}
             label="Submit the flag"
-            onChange={(e) => {
+            setInput={(e) => {
               setSubmission(e.target.value);
             }}
           />

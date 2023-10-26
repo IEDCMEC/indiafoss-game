@@ -22,7 +22,8 @@ export default async function handler(req, res) {
           phone_number: phoneNumber,
         },
       ])
-      .select("id,name, email");
+      .select("id, name, email");
+
 
     const secret = process.env.SECRET
     const token = jwt.sign(email,secret)

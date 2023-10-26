@@ -60,12 +60,15 @@ function Home() {
           name: "",
           email: "",
           phoneNumber: "",
-        });
+        }); 
         return;
       }
+      window.localStorage.setItem("progressing", true)
       window.localStorage.setItem("token", res.data.token);
+      window.localStorage.setItem("TheGameUserId", res.data.data[0].id)
+       window.localStorage.setItem("timer", 600);
       window.localStorage.setItem("data", JSON.stringify(formData));
-      router.push("/game-1");
+      router.replace("/game-1");
     }
   };
 

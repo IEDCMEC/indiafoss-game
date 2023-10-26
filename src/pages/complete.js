@@ -1,8 +1,13 @@
 import { Box, Heading, Text, Button, Flex, Avatar } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import Navbar from "@/Components/Navbar";
+import { useContext } from "react";
+import { useTimer } from "@/contexts/Timer";
+
 function Complete() {
   const router = useRouter();
+const { setSeconds } = useTimer();
+
   return (
     <>
       <Navbar />
@@ -30,7 +35,10 @@ function Complete() {
           color="white"
           onClick={() => {
             window.localStorage.removeItem("token");
-            window.localStorage.removeItem("timer");
+            window.localStorage.removeItem("TheGameUserId")
+            window.localStorage.setItem("progressing", false);
+            window.localStorage.setItem("timer", 600);
+            setSeconds(600);
             router.replace("/");
           }}
         >
