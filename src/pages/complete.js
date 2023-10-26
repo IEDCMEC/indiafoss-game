@@ -7,7 +7,6 @@ import { useTimer } from "@/contexts/Timer";
 function Complete() {
   const router = useRouter();
 const { setSeconds } = useTimer();
-// console.log(useTimer())
 
   return (
     <>

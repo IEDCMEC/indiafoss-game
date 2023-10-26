@@ -34,9 +34,6 @@ export default function Game7() {
         .update({ score: gameScore, time_taken: 600 - timer })
         .eq("id", 20);
 
-      if (error) {
-        console.log(error);
-      }
       router.push(game8URL);
     } else {
       window.alert("Incorrect!");
@@ -51,7 +48,6 @@ export default function Game7() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log({ username, password });
     const { data, error } = await supabaseClient
       .from("players")
       .select("*")
