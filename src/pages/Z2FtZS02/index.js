@@ -55,6 +55,13 @@ export default function Game6() {
     fetchUniqueFlag();
   }, []);
 
+  useEffect(() => {
+    if (timer < 1) {
+      window.alert("Time's up!");
+      router.replace("/complete");
+    }
+  }, [timer]);
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     if (username === "admin" && password === "admin") {

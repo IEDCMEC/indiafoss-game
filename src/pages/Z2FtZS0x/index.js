@@ -52,6 +52,13 @@ export default function Game1() {
     fetchUniqueFlag();
   }, []);
 
+  useEffect(() => {
+    if (timer < 1) {
+      window.alert("Time's up!");
+      router.replace("/complete");
+    }
+  }, [timer]);
+
   return (
     <Box
       backgroundColor="#c2d0dd"

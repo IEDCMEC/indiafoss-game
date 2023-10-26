@@ -21,22 +21,29 @@ export default function Game5() {
 
   const handleFlagSubmit = async (e) => {
     e.preventDefault();
-      const res = await axios.post("/api/check/game-5", {
-        authToken: window.localStorage.getItem("token"),
-        flag:submission,
-        timeTaken: 600 - timer,
-      });
+    const res = await axios.post("/api/check/game-5", {
+      authToken: window.localStorage.getItem("token"),
+      flag: submission,
+      timeTaken: 600 - timer,
+    });
 
-      if (res.status == 200) {
-        router.replace(game6URL);
-      }
-    };
+    if (res.status == 200) {
+      router.replace(game6URL);
+    }
+  };
 
   useEffect(() => {
     if (window.localStorage.getItem("token") === null) {
       router.replace("/");
     }
   }, []);
+
+  useEffect(() => {
+    if (timer < 1) {
+      window.alert("Time's up!");
+      router.replace("/complete");
+    }
+  }, [timer]);
 
   return (
     <Box

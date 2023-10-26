@@ -53,6 +53,13 @@ export default function Game7() {
     }
   }, []);
 
+  useEffect(() => {
+    if (timer < 1) {
+      window.alert("Time's up!");
+      router.replace("/complete");
+    }
+  }, [timer]);
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const { data, error } = await supabasePublicClient
