@@ -40,7 +40,7 @@ export default function Game1() {
     if (res.status == 200) {
       const newFlag = generateUniqueFlag(window.localStorage.getItem("TheGameUserId"))
       const flagg =  `${game3FlagStaticPart}${newFlag}}`
-      document.cookie = `flag=${flagg};path=/game-1`;
+      document.cookie = `flag=${flagg};path=/Z2FtZS0z`;
       router.replace(game2URL);
     }
   };

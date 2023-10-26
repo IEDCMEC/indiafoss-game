@@ -9,7 +9,7 @@ import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
 import axios from "axios";
 
-const gameAPI = "/api/Z2FtZS00";
+const gameAPI = "/api/Z2FtZS00/";
 const gameScore = 4;
 const game5URL = "/Z2FtZS01";
 
@@ -96,8 +96,9 @@ export default function Game4() {
           <Heading as="h2" size="xl">
             API check
           </Heading>
-          {/* <p>Time Left: {timer}</p> */}
-          {timer < 300 ? <p>API: /api/Z2FtZS00</p> : null}
+          <p>{`API: ${gameAPI}${btoa(
+            window.localStorage.getItem("TheGameUserId")
+          )}`}</p>
         </Box>
         <form onSubmit={handleFlagSubmit}>
           <Box
