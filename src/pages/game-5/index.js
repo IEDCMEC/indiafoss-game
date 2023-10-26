@@ -8,6 +8,7 @@ import { Heading } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
+import axios from "axios";
 const gameAPI = "/api/game-5";
 const gameScore = 5;
 const game6URL = "/game-6";
@@ -22,7 +23,6 @@ export default function Game5() {
     e.preventDefault();
       const res = await axios.post("/api/check/game-5", {
         authToken: window.localStorage.getItem("token"),
-        score: gameScore,
         flag:submission,
         timeTaken: 600 - timer,
       });
