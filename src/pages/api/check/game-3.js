@@ -1,6 +1,5 @@
 import generateUniqueFlag from "@/utils/UniqueFlag";
 import { supabaseClient } from "@/utils/supabase";
-import axios from "axios";
 import jwt from "jsonwebtoken";
 
 export default async function handler(req, res) {
@@ -8,8 +7,6 @@ export default async function handler(req, res) {
     const game3FlagStaticPart = "flag{dfsafewcvascd";
     const token = req.body.authToken;
     const flag = req.body.flag;
-    const expectedFlagRes = await axios.get("/api/game-4");
-    const expectedFlag = expectedFlagRes.data.flag;
     const timeTaken = req.body.timeTaken;
     const email = await jwt.verify(token, process.env.SECRET);
 
@@ -20,7 +17,7 @@ export default async function handler(req, res) {
 
     let newFlag = generateUniqueFlag(userId[0].id.toString());
 
-    if (flag != `${expectedFlag}`) {
+    if (flag != `${game3FlagStaticPart}${newFlag}}`) {
       return res.status(500).json({
         error: "wrong flag!",
       });
