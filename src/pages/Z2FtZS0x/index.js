@@ -13,7 +13,7 @@ const game1FlagStaticPart = "flag{dskajfhsdhk";
 const game3FlagStaticPart = "flag{dfsafewcvascd";
 
 const gameScore = 1;
-const game2URL = "/game-3";
+const game2URL = "/Z2FtZS0z";
 
 export default function Game1() {
   const router = useRouter();

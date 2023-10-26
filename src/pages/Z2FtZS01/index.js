@@ -9,9 +9,9 @@ import { Button } from "@chakra-ui/react";
 import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
 import axios from "axios";
-const gameAPI = "/api/game-5";
+const gameAPI = "/api/Z2FtZS01";
 const gameScore = 5;
-const game6URL = "/game-6";
+const game6URL = "/Z2FtZS02";
 
 export default function Game5() {
   const router = useRouter();
@@ -76,7 +76,7 @@ export default function Game5() {
             Head API
           </Heading>
           {/* <p>Time Left: {timer}</p> */}
-          {timer < 300 ? <p>API: /api/game-5</p> : null}
+          {timer < 300 ? <p>API: /api/Z2FtZS01</p> : null}
         </Box>
         <form onSubmit={handleFlagSubmit}>
           <Box

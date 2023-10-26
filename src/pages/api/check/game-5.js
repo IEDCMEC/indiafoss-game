@@ -9,7 +9,7 @@ export default async function handler(req, res) {
     const flag = req.body.flag;
     const timeTaken = req.body.timeTaken;
     const email = await jwt.verify(token, process.env.SECRET);
-    const expectedFlagData = await axios.head("/api/game-5");
+    const expectedFlagData = await axios.head("/api/Z2FtZS01");
 
     const expectedFlag = expectedFlagData.headers.get("flag");
 

@@ -13,40 +13,40 @@ import axios from "axios";
 
 const game3FlagStaticPart = "flag{dfsafewcvascd";
 const gameScore = 3;
-const game4URL = "/game-4";
+const game4URL = "/Z2FtZS00";
 
 export default function Game3() {
   const router = useRouter();
-  const {timer} = useTimer();
+  const { timer } = useTimer();
 
   const [flag, setFlag] = useState("");
   const [submission, setSubmission] = useState("");
 
   const fetchUniqueFlag = () => {
-    const userId = window.localStorage.getItem("TheGameUserId")
+    const userId = window.localStorage.getItem("TheGameUserId");
     const newFlag = generateUniqueFlag(userId);
     setFlag(`${game3FlagStaticPart}${newFlag}}`);
   };
 
   const handleFlagSubmit = async (e) => {
     e.preventDefault();
-      const res = await axios.post("/api/check/game-3", {
-        authToken: window.localStorage.getItem("token"),
-        flag: submission,
-        timeTaken: 600 - timer,
-      });
+    const res = await axios.post("/api/check/game-3", {
+      authToken: window.localStorage.getItem("token"),
+      flag: submission,
+      timeTaken: 600 - timer,
+    });
 
-      if (res.status == 200) {
-        router.replace(game4URL);
-      }
+    if (res.status == 200) {
+      router.replace(game4URL);
+    }
   };
 
   useEffect(() => {
     if (window.localStorage.getItem("token") === null) {
       router.replace("/");
     }
-  
-    //document.cookie = `flag=${flag};path=/game-3`;
+
+    document.cookie = `flag=${flag};path=/Z2FtZS0z`;
   }, [flag]);
 
   useEffect(() => {
@@ -63,7 +63,7 @@ export default function Game3() {
       alignItems="center"
       justifyContent="center"
     >
-      <Navbar/>
+      <Navbar />
       <Box
         flexDirection={"column"}
         display="flex"
@@ -93,14 +93,14 @@ export default function Game3() {
           {/* <p>Time Left: {timer}</p> */}
         </Box>
         <form onSubmit={handleFlagSubmit}>
-        <Box
-          display="flex"
-          alignItems="center"
-          justifyContent={"center"}
-          flexDirection={"column"}
-          width={"350px"}
-        >
-          {/* <label htmlFor="submission">Flag</label>
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent={"center"}
+            flexDirection={"column"}
+            width={"350px"}
+          >
+            {/* <label htmlFor="submission">Flag</label>
           <input
             id="submission"
             type="text"
@@ -109,28 +109,31 @@ export default function Game3() {
               setSubmission(e.target.value);
             }}
           /> */}
-          <CustomForm
-            id="submission"
-            type="text"
-            value={submission}
-            label="Submit the flag"
-            setInput={(e) => {
-              setSubmission(e.target.value);
-            }}
-          />
-          <Button
-          backgroundColor="#094074" 
-          sx={{
-              '&:hover':{
-              backgroundColor:"#094074" 
-          }
-          }} color="white" type="submit">
-            Submit
-          </Button>
-        </Box>
-      </form>
+            <CustomForm
+              id="submission"
+              type="text"
+              value={submission}
+              label="Submit the flag"
+              setInput={(e) => {
+                setSubmission(e.target.value);
+              }}
+            />
+            <Button
+              backgroundColor="#094074"
+              sx={{
+                "&:hover": {
+                  backgroundColor: "#094074",
+                },
+              }}
+              color="white"
+              type="submit"
+            >
+              Submit
+            </Button>
+          </Box>
+        </form>
       </Box>
-      <Footer/>
+      <Footer />
     </Box>
   );
 }
