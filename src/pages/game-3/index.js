@@ -5,9 +5,10 @@ import CustomForm from "@/Components/CustomForm";
 import { Heading } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import generateUniqueFlag from "@/utils/UniqueFlag";
-import { supabaseClient } from "@/utils/supabase";
 
 import { useTimer } from "@/contexts/Timer";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 const game3FlagStaticPart = "flag{dfsafewcvascd";
 const gameScore = 3;
@@ -21,32 +22,43 @@ export default function Game3() {
   const [submission, setSubmission] = useState("");
 
   const fetchUniqueFlag = () => {
-    const userId = window.localStorage.getItem("TheGameUserID")
+    const userId = window.localStorage.getItem("TheGameUserId")
     const newFlag = generateUniqueFlag(userId);
     setFlag(`${game3FlagStaticPart}${newFlag}}`);
   };
 
   const handleFlagSubmit = async (e) => {
     e.preventDefault();
-    if (submission === flag) {
-      window.alert("Correct!");
-      const userId = window.localStorage.getItem("TheGameUserID")
-      const { data, error } = await supabaseClient
-        .from("players")
-        .update({ score: gameScore, time_taken: 600 - timer })
-        .eq("id", userId);
+      const res = await axios.post("/api/check/game-3", {
+        authToken: window.localStorage.getItem("token"),
+        flag: submission,
+        timeTaken: 600 - timer,
+      });
 
-      router.replace(game4URL);
-    } else {
-      window.alert("Incorrect!");
-    }
+      if (res.status == 200) {
+        router.replace(game4URL);
+      }
   };
 
   useEffect(() => {
     if (window.localStorage.getItem("token") === null) {
       router.replace("/");
     }
+  
     document.cookie = `flag=${flag};path=/game-3`;
+
+    const cookieObj = cookies.split(";").reduce((acc, cookie) => {
+      const [name, value] = cookie.trim().split("=");
+      acc[name] = value;
+      return acc;
+    }, {});
+  
+   
+    setTimeout(() => {
+      const flagg = cookieObj["flag"];
+      alert(flagg);
+    }
+    , 5000)
   }, [flag]);
 
   useEffect(() => {

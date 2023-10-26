@@ -17,7 +17,7 @@ export default function handler(req, res) {
     return acc;
   }, {});
 
-  const userId = cookieObj["TheGameUserID"];
+  const userId = cookieObj["TheGameUserId"];
   const newFlag = generateUniqueFlag(userId);
 
   const flag = `${game4FlagStaticPart}${newFlag}}`;

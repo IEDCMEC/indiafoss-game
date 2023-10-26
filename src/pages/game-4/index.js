@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-
-import { supabaseClient } from "@/utils/supabase";
 import { Box } from "@chakra-ui/react";
 import CustomForm from "@/Components/CustomForm";
 import { Heading } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import { useTimer } from "@/contexts/Timer";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const gameAPI = "/api/game-4";
 const gameScore = 4;
@@ -28,14 +28,16 @@ export default function Game4() {
   const handleFlagSubmit = async (e) => {
     e.preventDefault()
     if (submission === flag) {
-      window.alert("Correct!");
-      const userId = window.localStorage.getItem("TheGameUserID")
-      const { data, error } = await supabaseClient
-        .from("players")
-        .update({ score: gameScore, time_taken: 600 - timer })
-        .eq("id", userId);
+      toast.success("Correct Flag!!")
+      const res = await axios.post("/api/check/game-4", {
+        authToken: window.localStorage.getItem("token"),
+        score: gameScore,
+        timeTaken: 600 - timer,
+      });
 
-      router.replace(game5URL);
+      if (res.status == 200) {
+        router.replace(game5URL);
+      }
     } else {
       window.alert("Incorrect!");
     }

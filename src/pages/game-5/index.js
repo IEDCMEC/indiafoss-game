@@ -8,6 +8,7 @@ import { Box } from "@chakra-ui/react";
 import CustomForm from "@/Components/CustomForm";
 import { Heading } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
+import toast from "react-hot-toast";
 const gameAPI = "/api/game-5";
 const gameScore = 5;
 const game6URL = "/game-6";
@@ -32,14 +33,16 @@ export default function Game5() {
   const handleFlagSubmit = async (e) => {
     e.preventDefault()
     if (submission === flag) {
-      window.alert("Correct!");
-      const userId = window.localStorage.getItem("TheGameUserID")
-      const { data, error } = await supabaseClient
-        .from("players")
-        .update({ score: gameScore, time_taken: 600 - timer })
-        .eq("id", userId);
+      toast.success("Correct Flag!!")
+      const res = await axios.post("/api/check/game-5", {
+        authToken: window.localStorage.getItem("token"),
+        score: gameScore,
+        timeTaken: 600 - timer,
+      });
 
-      router.replace(game6URL);
+      if (res.status == 200) {
+        router.replace(game6URL);
+      }
     } else {
       window.alert("Incorrect!");
     }

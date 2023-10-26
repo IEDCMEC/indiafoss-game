@@ -64,6 +64,7 @@ function Home() {
       window.localStorage.setItem("progressing", true)
       window.localStorage.setItem("token", res.data.token);
       window.localStorage.setItem("TheGameUserId", res.data.data[0].id)
+      document.cookie = `TheGameUserId=${res.data.data[0].id};path=/`;
        window.localStorage.setItem("timer", 600);
       router.replace("/game-1");
     }

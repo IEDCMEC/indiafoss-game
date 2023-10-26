@@ -8,6 +8,7 @@ import CustomForm from "@/Components/CustomForm";
 import { Heading } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import { useTimer } from "@/contexts/Timer";
+import toast from "react-hot-toast";
 
 const game6FlagStaticPart = "flag{dskajfhsdhk";
 const gameScore = 6;
@@ -21,7 +22,7 @@ export default function Game6() {
   const [submission, setSubmission] = useState("");
 
   const fetchUniqueFlag = () => {
-    const userId = window.localStorage.getItem("TheGameUserID")
+    const userId = window.localStorage.getItem("TheGameUserId")
     const newFlag = generateUniqueFlag(userId);
     setFlag(`${game6FlagStaticPart}${newFlag}}`);
   };
@@ -29,14 +30,16 @@ export default function Game6() {
   const handleFlagSubmit = async (e) => {
     e,preventDefault();
     if (submission === flag) {
-      window.alert("Correct!");
-      const userId = window.localStorage.getItem("TheGameUserID")
-      const { data, error } = await supabaseClient
-        .from("players")
-        .update({ score: gameScore, time_taken: 600 - timer })
-        .eq("id", userId);
+      toast.success("Correct Flag!!")
+      const res = await axios.post("/api/check/game-6", {
+        authToken: window.localStorage.getItem("token"),
+        score: gameScore,
+        timeTaken: 600 - timer,
+      });
 
-      router.replace(game7URL);
+      if (res.status == 200) {
+        router.replace(game7URL);
+      }
     } else {
       window.alert("Incorrect!");
     }

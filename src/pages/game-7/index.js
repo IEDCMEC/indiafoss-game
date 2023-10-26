@@ -28,7 +28,7 @@ export default function Game7() {
 
     if (submission === flag) {
       window.alert("Correct!");
-      const userId = window.localStorage.getItem("TheGameUserID")
+      const userId = window.localStorage.getItem("TheGameUserId")
       const { data, error } = await supabaseClient
         .from("players")
         .update({ score: gameScore, time_taken: 600 - timer })
