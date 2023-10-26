@@ -1,4 +1,5 @@
 import { supabaseClient } from "@/utils/supabase";
+import axios from "axios";
 import jwt from "jsonwebtoken";
 
 export default async function handler(req, res) {
@@ -8,9 +9,7 @@ export default async function handler(req, res) {
     const flag = req.body.flag;
     const timeTaken = req.body.timeTaken;
     const email = await jwt.verify(token, process.env.SECRET);
-    const expectedFlagData = await fetch(gameAPI, {
-      method: "HEAD",
-    });
+    const expectedFlagData = await axios.head("/api/game-5");
 
     const expectedFlag = expectedFlagData.headers.get("flag");
 

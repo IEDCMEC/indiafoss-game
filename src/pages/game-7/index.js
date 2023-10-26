@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 import generateUniqueFlag from "@/utils/UniqueFlag";
-import { supabaseClient } from "@/utils/supabase";
+// import { supabaseClient } from "@/utils/supabase";
 import { Box } from "@chakra-ui/react";
 import CustomForm from "@/Components/CustomForm";
 import { Heading } from "@chakra-ui/react";
@@ -28,18 +28,18 @@ export default function Game7() {
     const { data, error } = await supabaseClient.from("flags").select("*");
     const flag = data[0].flag;
 
-    if (submission === flag) {
-      window.alert("Correct!");
-      const userId = window.localStorage.getItem("TheGameUserId")
-      const { data, error } = await supabaseClient
-        .from("players")
-        .update({ score: gameScore, time_taken: 600 - timer })
-        .eq("id", userId);
+    // if (submission === flag) {
+    //   window.alert("Correct!");
+    //   const userId = window.localStorage.getItem("TheGameUserId")
+    //   const { data, error } = await supabaseClient
+    //     .from("players")
+    //     .update({ score: gameScore, time_taken: 600 - timer })
+    //     .eq("id", userId);
 
-      router.replace(game8URL);
-    } else {
-      window.alert("Incorrect!");
-    }
+    //   router.replace(game8URL);
+    // } else {
+    //   window.alert("Incorrect!");
+    // }
   };
 
   useEffect(() => {

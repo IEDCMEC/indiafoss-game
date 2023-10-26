@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 import generateUniqueFlag from "@/utils/UniqueFlag";
-import { supabaseClient } from "@/utils/supabase";
 import { Box } from "@chakra-ui/react";
 import CustomForm from "@/Components/CustomForm";
 import { Heading } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import { useTimer } from "@/contexts/Timer";
+import Navbar from "@/Components/Navbar";
+import Footer from "@/Components/Footer";
 
 const game6FlagStaticPart = "flag{dskajfhsdhk";
 const gameScore = 6;
