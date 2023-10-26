@@ -14,7 +14,7 @@ const Footer = () => {
       alignItems={"center"}
       justifyContent={"center"}
       position="absolute"
-      backgroundColor="#eee2e3"
+      backgroundColor="#c2d0dd"
       bottom={"0"}
       width={"100vw"}
       minHeight={{ base: "50px", md: "100px" }}

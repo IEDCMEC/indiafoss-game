@@ -82,7 +82,7 @@ function Home() {
       alignItems="center"
       justifyContent="center"
       height="100vh"
-      backgroundColor="#eee2e3"
+      backgroundColor="#c2d0dd"
     >
       <Heading as="h1" size="2xl" mb={6}>
         Capture The Flag!
@@ -94,7 +94,7 @@ function Home() {
         borderWidth={1}
         borderRadius="md"
         boxShadow="md"
-        border="2px solid #580c1f"
+        border="2px solid #094074"
         mb={'50px'}
       >
         <form onSubmit={handleSubmit}>
@@ -106,7 +106,7 @@ function Home() {
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
               }
-              border="2px solid #580c1f"
+              border="2px solid #094074"
               sx={{
                 '&:hover':{
                   border: '2px solid #190482'
@@ -129,7 +129,7 @@ function Home() {
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
               }
-              border="2px solid #580c1f"
+              border="2px solid #094074"
               sx={{
                 '&:hover':{
                   border: '2px solid #190482'
@@ -152,7 +152,7 @@ function Home() {
               onChange={(e) =>
                 setFormData({ ...formData, phoneNumber: e.target.value })
               }
-              border="2px solid #580c1f"
+              border="2px solid #094074"
               sx={{
                 '&:hover':{
                   border: '2px solid #190482'
@@ -161,7 +161,7 @@ function Home() {
             />
           </FormControl>
 
-          <Button type="submit" colorScheme="teal" w={"100%"}>
+          <Button type="submit" backgroundColor="#094074" color="white" w={"100%"}>
             Play Game
           </Button>
         </form>

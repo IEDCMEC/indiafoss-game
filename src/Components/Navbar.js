@@ -16,7 +16,7 @@ const Navbar = ({gamename}) => {
     <Flex
       justify="space-between"
       alignItems="center"
-      bg="#c52233"
+      bg="#094074"
       color="white"
       borderBottomLeftRadius={'md'}
       borderBottomRightRadius={'md'}
@@ -32,7 +32,7 @@ const Navbar = ({gamename}) => {
         </Heading>
       </Box>
       <Box>
-        <p fontSize="sm">Timer: {timer} seconds</p>
+        <Text fontSize='1.3rem'>Time left: {timer} s</Text>
         <Flex alignItems="center">
           <Avatar size="sm" name={data.name} src="/avatar.jpg" mr={2} />
           <Text fontSize="sm">{data.email}</Text>

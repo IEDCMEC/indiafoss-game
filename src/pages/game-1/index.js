@@ -56,7 +56,7 @@ export default function Game1() {
 
   return (
     <Box
-      backgroundColor="#eee2e3"
+      backgroundColor="#c2d0dd"
       height="100vh"
       width="100vw"
       flexDirection={"column"}
@@ -80,7 +80,7 @@ export default function Game1() {
         alignItems="center"
         justifyContent="space-between"
         width={{ base: "95vw", sm: "400px" }}
-        border="2px solid #580c1f"
+        border="2px solid #094074"
         borderRadius={"md"}
         // backgroundColor="white"
         padding={"30px 0"}
@@ -157,7 +157,7 @@ export default function Game1() {
                 setSubmission(e.target.value);
               }}
             />
-            <Button colorScheme="teal" type="submit">
+            <Button backgroundColor="#094074" color="white" type="submit">
               Submit
             </Button>
           </Box>
