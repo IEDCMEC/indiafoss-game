@@ -42,7 +42,7 @@ function Complete() {
         alignItems="center"
         justifyContent="center"
         height="80vh"
-        color="teal"
+        // color="teal"
       >
         <Heading as="h1" size="xl" mb={4} color="black">
           Thank You for Playing!
