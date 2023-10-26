@@ -5,19 +5,12 @@ import generateUniqueFlag from "@/utils/UniqueFlag";
 const game4FlagStaticPart = "flag{dfsafewcvascd";
 
 export default function handler(req, res) {
+  const { userId } = req.query;
+
   if (req.method !== "GET") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const cookies = req.headers.cookie;
-
-  const cookieObj = cookies.split(";").reduce((acc, cookie) => {
-    const [name, value] = cookie.trim().split("=");
-    acc[name] = value;
-    return acc;
-  }, {});
-
-  const userId = cookieObj["TheGameUserId"];
   const newFlag = generateUniqueFlag(userId);
 
   const flag = `${game4FlagStaticPart}${newFlag}}`;
