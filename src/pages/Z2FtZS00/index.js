@@ -9,9 +9,9 @@ import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
 import axios from "axios";
 
-const gameAPI = "/api/game-4";
+const gameAPI = "/api/Z2FtZS00";
 const gameScore = 4;
-const game5URL = "/game-5";
+const game5URL = "/Z2FtZS01";
 
 export default function Game4() {
   const router = useRouter();
@@ -90,7 +90,7 @@ export default function Game4() {
             API check
           </Heading>
           {/* <p>Time Left: {timer}</p> */}
-          {timer < 300 ? <p>API: /api/game-4</p> : null}
+          {timer < 300 ? <p>API: /api/Z2FtZS00</p> : null}
         </Box>
         <form onSubmit={handleFlagSubmit}>
           <Box

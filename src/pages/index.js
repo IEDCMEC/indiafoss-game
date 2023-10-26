@@ -68,7 +68,7 @@ function Home() {
       document.cookie = `TheGameUserId=${res.data.data[0].id};path=/`;
        window.localStorage.setItem("timer", 600);
       window.localStorage.setItem("data", JSON.stringify(formData));
-      router.replace("/game-1");
+      router.replace("/Z2FtZS0x");
     }
   };
 

@@ -12,25 +12,28 @@ import Footer from "@/Components/Footer";
 
 const game6FlagStaticPart = "flag{dskajfhsdhk";
 const gameScore = 6;
-const game7URL = "/";
+const game7URL = "/Z2FtZS03";
 
 export default function Game6() {
   const router = useRouter();
-  const {timer} = useTimer();
+  const { timer } = useTimer();
 
   const [flag, setFlag] = useState("");
   const [submission, setSubmission] = useState("");
 
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
   const fetchUniqueFlag = () => {
-    const userId = window.localStorage.getItem("TheGameUserId")
+    const userId = window.localStorage.getItem("TheGameUserId");
     const newFlag = generateUniqueFlag(userId);
     setFlag(`${game6FlagStaticPart}${newFlag}}`);
   };
 
   const handleFlagSubmit = async (e) => {
-    e,preventDefault();
+    e, preventDefault();
     if (submission === flag) {
-      toast.success("Correct Flag!!")
+      toast.success("Correct Flag!!");
       const res = await axios.post("/api/check/game-6", {
         authToken: window.localStorage.getItem("token"),
         score: gameScore,
@@ -54,7 +57,9 @@ export default function Game6() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    await fetch(`/next-page/id={${flag}}`);
+    if (username === "admin" && password === "admin") {
+      await fetch(`/next-page/id={${flag}}`);
+    }
     window.alert("Invalid credentials");
   };
 
@@ -66,9 +71,9 @@ export default function Game6() {
       flexDirection={{ base: "column", md: "row" }}
       display="flex"
       alignItems="center"
-      justifyContent='space-around'
+      justifyContent="space-around"
     >
-      <Navbar/>
+      <Navbar />
       <Box
         flexDirection={"column"}
         display="flex"
@@ -124,12 +129,15 @@ export default function Game6() {
               }}
             />
             <Button
-          backgroundColor="#094074" 
-          sx={{
-              '&:hover':{
-              backgroundColor:"#094074" 
-          }
-          }} color="white" type="submit">
+              backgroundColor="#094074"
+              sx={{
+                "&:hover": {
+                  backgroundColor: "#094074",
+                },
+              }}
+              color="white"
+              type="submit"
+            >
               Submit
             </Button>
           </Box>
@@ -153,39 +161,42 @@ export default function Game6() {
             justifyContent={"center"}
             flexDirection={"column"}
             width={"350px"}
-            height='100%'
+            height="100%"
           >
             <CustomForm
               id="username"
               type="text"
-              // value={submission}
+              input={username}
               label="Username"
-              // onChange={(e) => {
-                // setSubmission(e.target.value);
-              // }}
+              setInput={(e) => {
+                setUsername(e.target.value);
+              }}
             />
             <CustomForm
               id="password"
               type="password"
-              // value={submission}
+              input={password}
               label="Password"
-              // onChange={(e) => {
-                // setSubmission(e.target.value);
-              // }}
+              setInput={(e) => {
+                setPassword(e.target.value);
+              }}
             />
             <Button
-          backgroundColor="#094074" 
-          sx={{
-              '&:hover':{
-              backgroundColor:"#094074" 
-          }
-          }} color="white" type="submit">
+              backgroundColor="#094074"
+              sx={{
+                "&:hover": {
+                  backgroundColor: "#094074",
+                },
+              }}
+              color="white"
+              type="submit"
+            >
               Submit
             </Button>
           </Box>
         </Box>
       </form>
-      <Footer/>
+      <Footer />
     </Box>
   );
 }

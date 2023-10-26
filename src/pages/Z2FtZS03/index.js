@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 import generateUniqueFlag from "@/utils/UniqueFlag";
-// import { supabaseClient } from "@/utils/supabase";
+import { supabasePublicClient } from "@/utils/supabasePublic";
 import { Box } from "@chakra-ui/react";
 import CustomForm from "@/Components/CustomForm";
 import { Heading } from "@chakra-ui/react";
@@ -16,7 +16,7 @@ const game8URL = "/";
 
 export default function Game7() {
   const router = useRouter();
-  const {timer} = useTimer();
+  const { timer } = useTimer();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -25,13 +25,18 @@ export default function Game7() {
   const [submission, setSubmission] = useState("");
 
   const handleFlagSubmit = async () => {
-    const { data, error } = await supabaseClient.from("flags").select("*");
+    const { data, error } = await supabasePublicClient
+      .from("flags")
+      .select("*");
+
+    console.log({ error });
+
     const flag = data[0].flag;
 
     // if (submission === flag) {
     //   window.alert("Correct!");
     //   const userId = window.localStorage.getItem("TheGameUserId")
-    //   const { data, error } = await supabaseClient
+    //   const { data, error } = await supabasePublicClient
     //     .from("players")
     //     .update({ score: gameScore, time_taken: 600 - timer })
     //     .eq("id", userId);
@@ -50,8 +55,8 @@ export default function Game7() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const { data, error } = await supabaseClient
-      .from("players")
+    const { data, error } = await supabasePublicClient
+      .from("users")
       .select("*")
       .eq("username", username)
       .eq("password", password);
@@ -166,12 +171,15 @@ export default function Game7() {
               }}
             />
             <Button
-          backgroundColor="#094074" 
-          sx={{
-              '&:hover':{
-              backgroundColor:"#094074" 
-          }
-          }} color="white" type="submit">
+              backgroundColor="#094074"
+              sx={{
+                "&:hover": {
+                  backgroundColor: "#094074",
+                },
+              }}
+              color="white"
+              type="submit"
+            >
               Submit
             </Button>
           </Box>
@@ -212,12 +220,15 @@ export default function Game7() {
               setInput={(e) => setPassword(e.target.value)}
             />
             <Button
-          backgroundColor="#094074" 
-          sx={{
-              '&:hover':{
-              backgroundColor:"#094074" 
-          }
-          }} color="white" type="submit">
+              backgroundColor="#094074"
+              sx={{
+                "&:hover": {
+                  backgroundColor: "#094074",
+                },
+              }}
+              color="white"
+              type="submit"
+            >
               Submit
             </Button>
           </Box>
