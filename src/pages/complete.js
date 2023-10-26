@@ -50,6 +50,7 @@ const { setSeconds } = useTimer();
         <Button
           onClick={() => {
             window.localStorage.removeItem("token");
+            window.localStorage.removeItem("TheGameUserId")
             window.localStorage.setItem("progressing", false);
             window.localStorage.setItem("timer", 600);
             setSeconds(600);

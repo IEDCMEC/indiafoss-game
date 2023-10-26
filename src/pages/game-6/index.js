@@ -21,21 +21,22 @@ export default function Game6() {
   const [submission, setSubmission] = useState("");
 
   const fetchUniqueFlag = () => {
-    const userId = document.cookie["TheGameUserID"];
+    const userId = window.localStorage.getItem("TheGameUserID")
     const newFlag = generateUniqueFlag(userId);
     setFlag(`${game6FlagStaticPart}${newFlag}}`);
   };
 
-  const handleFlagSubmit = async () => {
+  const handleFlagSubmit = async (e) => {
+    e,preventDefault();
     if (submission === flag) {
       window.alert("Correct!");
-      const userId = document.cookie["TheGameUserID"];
+      const userId = window.localStorage.getItem("TheGameUserID")
       const { data, error } = await supabaseClient
         .from("players")
         .update({ score: gameScore, time_taken: 600 - timer })
-        .eq("id", 20);
+        .eq("id", userId);
 
-      router.push(game7URL);
+      router.replace(game7URL);
     } else {
       window.alert("Incorrect!");
     }
@@ -43,7 +44,7 @@ export default function Game6() {
 
   useEffect(() => {
     if (window.localStorage.getItem("token") === null) {
-      router.push("/");
+      router.replace("/");
     }
     fetchUniqueFlag();
   }, []);
@@ -114,7 +115,7 @@ export default function Game6() {
               type="text"
               value={submission}
               label="Submit the flag"
-              onChange={(e) => {
+              setInput={(e) => {
                 setSubmission(e.target.value);
               }}
             />
@@ -155,7 +156,7 @@ export default function Game6() {
             />
             <CustomForm
               id="password"
-              type="text"
+              type="password"
               // value={submission}
               label="Password"
               // onChange={(e) => {

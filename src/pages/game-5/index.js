@@ -29,16 +29,17 @@ export default function Game5() {
     setFlag(flag);
   };
 
-  const handleFlagSubmit = async () => {
+  const handleFlagSubmit = async (e) => {
+    e.preventDefault()
     if (submission === flag) {
       window.alert("Correct!");
-      const userId = document.cookie["TheGameUserID"];
+      const userId = window.localStorage.getItem("TheGameUserID")
       const { data, error } = await supabaseClient
         .from("players")
         .update({ score: gameScore, time_taken: 600 - timer })
         .eq("id", userId);
 
-      router.push(game6URL);
+      router.replace(game6URL);
     } else {
       window.alert("Incorrect!");
     }
@@ -46,7 +47,7 @@ export default function Game5() {
 
   useEffect(() => {
       if(window.localStorage.getItem("token") === null){
-        router.push("/")
+        router.replace("/")
       }
     fetchUniqueFlag();
   }, []);
@@ -112,7 +113,7 @@ export default function Game5() {
               type="text"
               value={submission}
               label="Submit the flag"
-              onChange={(e) => {
+              setInput={(e) => {
                 setSubmission(e.target.value);
               }}
             />

@@ -43,7 +43,7 @@ export default function Game1() {
 
   useEffect(() => {
     if (window.localStorage.getItem("token") === null) {
-      router.push("/");
+      router.replace("/");
     }
     fetchUniqueFlag();
   }, []);
