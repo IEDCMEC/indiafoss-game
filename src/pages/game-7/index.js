@@ -169,7 +169,13 @@ export default function Game7() {
                 setSubmission(e.target.value);
               }}
             />
-            <Button backgroundColor="#094074" color="white" type="submit">
+            <Button
+          backgroundColor="#094074" 
+          sx={{
+              '&:hover':{
+              backgroundColor:"#094074" 
+          }
+          }} color="white" type="submit">
               Submit
             </Button>
           </Box>
@@ -209,7 +215,13 @@ export default function Game7() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Button backgroundColor="#094074" color="white" type="submit">
+            <Button
+          backgroundColor="#094074" 
+          sx={{
+              '&:hover':{
+              backgroundColor:"#094074" 
+          }
+          }} color="white" type="submit">
               Submit
             </Button>
           </Box>
