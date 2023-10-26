@@ -5,8 +5,6 @@ import CustomForm from "@/Components/CustomForm";
 import { Heading } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import { useTimer } from "@/contexts/Timer";
-import axios from "axios";
-import toast from "react-hot-toast";
 
 const gameAPI = "/api/game-4";
 const gameScore = 4;
@@ -52,7 +50,7 @@ export default function Game4() {
 
   return (
     <Box
-      backgroundColor="#AEDEFC"
+      backgroundColor="#c2d0dd"
       height="100vh"
       width="100vw"
       flexDirection={"column"}
@@ -60,13 +58,14 @@ export default function Game4() {
       alignItems="center"
       justifyContent="center"
     >
+      <Navbar/>
       <Box
         flexDirection={"column"}
         display="flex"
         alignItems="center"
         justifyContent="space-between"
         width={{ base: "95vw", sm: "400px" }}
-        border="2px solid #190482"
+        border="2px solid #094074"
         borderRadius={"md"}
         padding={"30px 0"}
         minHeight="300px"
@@ -86,7 +85,7 @@ export default function Game4() {
           <Heading as="h2" size="xl">
             API check
           </Heading>
-          <p>Time Left: {timer}</p>
+          {/* <p>Time Left: {timer}</p> */}
           {timer < 300 ? <p>API: /api/game-4</p> : null}
         </Box>
         <form onSubmit={handleFlagSubmit}>
@@ -115,12 +114,19 @@ export default function Game4() {
                 setSubmission(e.target.value);
               }}
             />
-            <Button colorScheme="teal" type="submit">
+            <Button
+          backgroundColor="#094074" 
+          sx={{
+              '&:hover':{
+              backgroundColor:"#094074" 
+          }
+          }} color="white" type="submit">
               Submit
             </Button>
           </Box>
         </form>
       </Box>
+      <Footer/>
     </Box>
   );
 }
