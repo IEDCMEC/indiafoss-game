@@ -15,7 +15,7 @@ const game5URL = "/Z2FtZS01";
 
 export default function Game4() {
   const router = useRouter();
-  const {timer} = useTimer();
+  const { timer } = useTimer();
 
   // const [flag, setFlag] = useState("");
   const [submission, setSubmission] = useState("");
@@ -27,19 +27,19 @@ export default function Game4() {
   // };
 
   const handleFlagSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // if (submission === flag) {
     //   toast.success("Correct Flag!!")
-      const res = await axios.post("/api/check/game-4", {
-        authToken: window.localStorage.getItem("token"),
-        score: gameScore,
-        timeTaken: 600 - timer,
-        flag:submission
-      });
+    const res = await axios.post("/api/check/game-4", {
+      authToken: window.localStorage.getItem("token"),
+      score: gameScore,
+      timeTaken: 600 - timer,
+      flag: submission,
+    });
 
-      if (res.status == 200) {
-        router.replace(game5URL);
-      }
+    if (res.status == 200) {
+      router.replace(game5URL);
+    }
     // } else {
     //   window.alert("Incorrect!");
     // }
@@ -52,6 +52,13 @@ export default function Game4() {
     // fetchUniqueFlag();
   }, []);
 
+  useEffect(() => {
+    if (timer < 1) {
+      window.alert("Time's up!");
+      router.replace("/complete");
+    }
+  }, [timer]);
+
   return (
     <Box
       backgroundColor="#c2d0dd"
@@ -62,7 +69,7 @@ export default function Game4() {
       alignItems="center"
       justifyContent="center"
     >
-      <Navbar/>
+      <Navbar />
       <Box
         flexDirection={"column"}
         display="flex"
@@ -119,18 +126,21 @@ export default function Game4() {
               }}
             />
             <Button
-          backgroundColor="#094074" 
-          sx={{
-              '&:hover':{
-              backgroundColor:"#094074" 
-          }
-          }} color="white" type="submit">
+              backgroundColor="#094074"
+              sx={{
+                "&:hover": {
+                  backgroundColor: "#094074",
+                },
+              }}
+              color="white"
+              type="submit"
+            >
               Submit
             </Button>
           </Box>
         </form>
       </Box>
-      <Footer/>
+      <Footer />
     </Box>
   );
 }
