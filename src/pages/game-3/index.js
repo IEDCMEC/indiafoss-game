@@ -7,6 +7,9 @@ import { Button } from "@chakra-ui/react";
 import generateUniqueFlag from "@/utils/UniqueFlag";
 
 import { useTimer } from "@/contexts/Timer";
+import Navbar from "@/Components/Navbar";
+import Footer from "@/Components/Footer";
+import axios from "axios";
 
 const game3FlagStaticPart = "flag{dfsafewcvascd";
 const gameScore = 3;
@@ -43,20 +46,7 @@ export default function Game3() {
       router.replace("/");
     }
   
-    document.cookie = `flag=${flag};path=/game-3`;
-
-    const cookieObj = cookies.split(";").reduce((acc, cookie) => {
-      const [name, value] = cookie.trim().split("=");
-      acc[name] = value;
-      return acc;
-    }, {});
-  
-   
-    setTimeout(() => {
-      const flagg = cookieObj["flag"];
-      alert(flagg);
-    }
-    , 5000)
+    //document.cookie = `flag=${flag};path=/game-3`;
   }, [flag]);
 
   useEffect(() => {

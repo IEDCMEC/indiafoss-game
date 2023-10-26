@@ -5,6 +5,9 @@ import CustomForm from "@/Components/CustomForm";
 import { Heading } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import { useTimer } from "@/contexts/Timer";
+import Navbar from "@/Components/Navbar";
+import Footer from "@/Components/Footer";
+import axios from "axios";
 
 const gameAPI = "/api/game-4";
 const gameScore = 4;
@@ -14,38 +17,39 @@ export default function Game4() {
   const router = useRouter();
   const {timer} = useTimer();
 
-  const [flag, setFlag] = useState("");
+  // const [flag, setFlag] = useState("");
   const [submission, setSubmission] = useState("");
 
-  const fetchUniqueFlag = async () => {
-    const data = await fetch(gameAPI).then((res) => res.json());
-    const { flag } = data;
-    setFlag(flag);
-  };
+  // const fetchUniqueFlag = async () => {
+  //   const data = await fetch(gameAPI).then((res) => res.json());
+  //   const { flag } = data;
+  //   setFlag(flag);
+  // };
 
   const handleFlagSubmit = async (e) => {
     e.preventDefault()
-    if (submission === flag) {
-      toast.success("Correct Flag!!")
+    // if (submission === flag) {
+    //   toast.success("Correct Flag!!")
       const res = await axios.post("/api/check/game-4", {
         authToken: window.localStorage.getItem("token"),
         score: gameScore,
         timeTaken: 600 - timer,
+        flag:submission
       });
 
       if (res.status == 200) {
         router.replace(game5URL);
       }
-    } else {
-      window.alert("Incorrect!");
-    }
+    // } else {
+    //   window.alert("Incorrect!");
+    // }
   };
 
   useEffect(() => {
     if (window.localStorage.getItem("token") === null) {
       router.replace("/");
     }
-    fetchUniqueFlag();
+    // fetchUniqueFlag();
   }, []);
 
   return (

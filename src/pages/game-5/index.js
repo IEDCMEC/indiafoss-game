@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-import { supabaseClient } from "@/utils/supabase";
-
 import { useTimer } from "@/contexts/Timer";
 import { Box } from "@chakra-ui/react";
 import CustomForm from "@/Components/CustomForm";
 import { Heading } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
+import Navbar from "@/Components/Navbar";
+import Footer from "@/Components/Footer";
 const gameAPI = "/api/game-5";
 const gameScore = 5;
 const game6URL = "/game-6";
