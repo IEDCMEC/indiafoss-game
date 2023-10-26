@@ -10,7 +10,6 @@ import {
   AlertIcon,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { supabaseClient } from "@/utils/supabase";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Footer from "@/Components/Footer";
@@ -66,6 +65,7 @@ function Home() {
       window.localStorage.setItem("progressing", true)
       window.localStorage.setItem("token", res.data.token);
       window.localStorage.setItem("TheGameUserId", res.data.data[0].id)
+      document.cookie = `TheGameUserId=${res.data.data[0].id};path=/`;
        window.localStorage.setItem("timer", 600);
       window.localStorage.setItem("data", JSON.stringify(formData));
       router.replace("/game-1");

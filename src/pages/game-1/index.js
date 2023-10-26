@@ -2,43 +2,45 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 import generateUniqueFlag from "@/utils/UniqueFlag";
-import { supabaseClient } from "@/utils/supabase";
-import Navbar from "@/Components/Navbar";
 import { useTimer } from "@/contexts/Timer";
-import { Box, Button, Heading } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
+import axios from "axios";
+import Navbar from "@/Components/Navbar";
 import CustomForm from "@/Components/CustomForm";
 import Footer from "@/Components/Footer";
 import { Text } from "@chakra-ui/react";
 const game1FlagStaticPart = "flag{dskajfhsdhk";
+const game3FlagStaticPart = "flag{dfsafewcvascd";
+
 const gameScore = 1;
 const game2URL = "/game-3";
 
 export default function Game1() {
   const router = useRouter();
-  const {timer} = useTimer();
+  const { timer } = useTimer();
 
   const [flag, setFlag] = useState("");
   const [submission, setSubmission] = useState("");
 
   const fetchUniqueFlag = () => {
-    const userId =  window.localStorage.getItem("TheGameUserID");
+    const userId = window.localStorage.getItem("TheGameUserId");
     const newFlag = generateUniqueFlag(userId);
     setFlag(`${game1FlagStaticPart}${newFlag}}`);
   };
 
   const handleFlagSubmit = async (e) => {
-      e.preventDefault();
-    if (submission === flag) {
-      window.alert("Correct!");
-      const userId = window.localStorage.getItem("TheGameUserId");
-      const { data, error } = await supabaseClient
-        .from("players")
-        .update({ score: gameScore, time_taken: 600 - timer })
-        .eq("id", userId  );
+    e.preventDefault();
+    const res = await axios.post("/api/check/game-1", {
+      authToken: window.localStorage.getItem("token"),
+      timeTaken: 600 - timer,
+      flag: submission,
+    });
 
-       router.replace(game2URL);
-    } else {
-      window.alert("Incorrect!");
+    if (res.status == 200) {
+      const newFlag = generateUniqueFlag(window.localStorage.getItem("TheGameUserId"))
+      const flagg =  `${game3FlagStaticPart}${newFlag}}`
+      document.cookie = `flag=${flagg};path=/game-1`;
+      router.replace(game2URL);
     }
   };
 
@@ -106,8 +108,8 @@ export default function Game1() {
             as="h4"
             sx={{
               fontSize: "1.25rem",
-              textAlign:'center',
-              fontWeight:'500'
+              textAlign: "center",
+              fontWeight: "500",
             }}
           >
             Explore the elements present in this site to find the hidden flag.
@@ -153,12 +155,15 @@ export default function Game1() {
               }}
             />
             <Button
-          backgroundColor="#094074" 
-          sx={{
-              '&:hover':{
-              backgroundColor:"#094074" 
-          }
-          }} color="white" type="submit">
+              backgroundColor="#094074"
+              sx={{
+                "&:hover": {
+                  backgroundColor: "#094074",
+                },
+              }}
+              color="white"
+              type="submit"
+            >
               Submit
             </Button>
           </Box>

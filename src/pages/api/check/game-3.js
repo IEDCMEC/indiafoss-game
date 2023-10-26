@@ -1,0 +1,44 @@
+import generateUniqueFlag from "@/utils/UniqueFlag";
+import { supabaseClient } from "@/utils/supabase";
+import axios from "axios";
+import jwt from "jsonwebtoken";
+
+export default async function handler(req, res) {
+  if (req.method === "POST") {
+    const game3FlagStaticPart = "flag{dfsafewcvascd";
+    const token = req.body.authToken;
+    const flag = req.body.flag;
+    const expectedFlagRes = await axios.get("/api/game-4");
+    const expectedFlag = expectedFlagRes.data.flag;
+    const timeTaken = req.body.timeTaken;
+    const email = await jwt.verify(token, process.env.SECRET);
+
+    const { data: userId } = await supabaseClient
+      .from("players")
+      .select("id, score")
+      .eq("email", email);
+
+    let newFlag = generateUniqueFlag(userId[0].id.toString());
+
+    if (flag != `${expectedFlag}`) {
+      return res.status(500).json({
+        error: "wrong flag!",
+      });
+    }
+
+    const { data, error } = await supabaseClient
+      .from("players")
+      .update({ score: userId[0].score + 1, time_taken: timeTaken })
+      .eq("id", userId[0].id);
+
+    if (error) {
+      console.log(error);
+      return res.status(500).json({
+        error: "Something went wrong.",
+      });
+    }
+    return res.status(200).json({
+      message: "Success",
+    });
+  }
+}

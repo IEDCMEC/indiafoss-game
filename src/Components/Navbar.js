@@ -35,8 +35,8 @@ const Navbar = ({gamename}) => {
       <Box>
         <Text fontSize='1.3rem'>Time left: {timer.timer} s</Text>
         <Flex alignItems="center">
-          <Avatar size="sm" name={data.name} src="/avatar.jpg" mr={2} />
-          <Text fontSize="sm">{data.email}</Text>
+          <Avatar size="sm" name={data?.name} src="/avatar.jpg" mr={2} />
+          <Text fontSize="sm">{data?.email}</Text>
         </Flex>
       </Box>
     </Flex>
