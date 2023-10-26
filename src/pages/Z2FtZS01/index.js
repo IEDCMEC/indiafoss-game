@@ -9,7 +9,7 @@ import { Button } from "@chakra-ui/react";
 import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
 import axios from "axios";
-const gameAPI = "/api/Z2FtZS01";
+const gameAPI = "/api/Z2FtZS01/";
 const gameScore = 5;
 const game6URL = "/Z2FtZS02";
 
@@ -17,6 +17,7 @@ export default function Game5() {
   const router = useRouter();
   const { timer } = useTimer();
 
+  const [userId, setUserId] = useState("");
   const [submission, setSubmission] = useState("");
 
   const handleFlagSubmit = async (e) => {
@@ -36,6 +37,7 @@ export default function Game5() {
     if (window.localStorage.getItem("token") === null) {
       router.replace("/");
     }
+    setUserId(window.localStorage.getItem("TheGameUserId"));
   }, []);
 
   useEffect(() => {
@@ -83,7 +85,7 @@ export default function Game5() {
             Head API
           </Heading>
           {/* <p>Time Left: {timer}</p> */}
-          {timer < 300 ? <p>API: /api/Z2FtZS01</p> : null}
+          <p>{`API: ${gameAPI}${btoa(userId)}`}</p>
         </Box>
         <form onSubmit={handleFlagSubmit}>
           <Box
