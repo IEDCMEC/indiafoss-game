@@ -56,13 +56,6 @@ export default function Game7() {
     }
   }, []);
 
-  useEffect(() => {
-    if (timer < 1) {
-      window.alert("Time's up!");
-      router.replace("/complete");
-    }
-  }, [timer]);
-
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -72,7 +65,7 @@ export default function Game7() {
     }
 
     setLoading1(true);
-
+    console.log(username, password);
     const { data, error } = await supabasePublicClient
       .from("users")
       .select("*")
@@ -127,7 +120,7 @@ export default function Game7() {
             Access granted with the organizers' heart.
           </Text>
         </Box>
-        <form onSubmit={!loading ? handleFlagSubmit : ""}>
+        <form onSubmit={!loading && handleFlagSubmit}>
           <Box
             display="flex"
             alignItems="center"
@@ -159,7 +152,7 @@ export default function Game7() {
           </Box>
         </form>
       </Box>
-      <form onSubmit={!loading1 ? handleFormSubmit : ""}>
+      <form onSubmit={!loading1 && handleFormSubmit}>
         <Box
           flexDirection={"column"}
           display="flex"

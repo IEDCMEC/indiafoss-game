@@ -52,13 +52,6 @@ export default function Game4() {
     setUserId(window.localStorage.getItem("TheGameUserId"));
   }, []);
 
-  useEffect(() => {
-    if (timer < 1) {
-      window.alert("Time's up!");
-      router.replace("/complete");
-    }
-  }, [timer]);
-
   return (
     <Box
       backgroundColor="#c2d0dd"
@@ -99,9 +92,16 @@ export default function Game4() {
             Point your eyes towards the end, there you will find your place of
             rest.
           </Text>
-          <p>{`API: ${gameAPI}${btoa(userId)}`}</p>
+          <Text
+            sx={{
+              marginTop: "0.5rem",
+              fontSize: "1rem",
+              textAlign: "center",
+              fontWeight: "700",
+            }}
+          >{`API: ${gameAPI}${btoa(userId)}`}</Text>
         </Box>
-        <form onSubmit={!loading ? handleFlagSubmit : ""}>
+        <form onSubmit={!loading && handleFlagSubmit}>
           <Box
             display="flex"
             alignItems="center"

@@ -55,13 +55,6 @@ export default function Game5() {
     setUserId(window.localStorage.getItem("TheGameUserId"));
   }, []);
 
-  useEffect(() => {
-    if (timer < 1) {
-      window.alert("Time's up!");
-      router.replace("/complete");
-    }
-  }, [timer]);
-
   return (
     <Box
       backgroundColor="#c2d0dd"
@@ -102,9 +95,16 @@ export default function Game5() {
             Head to a path you were already past, but alas this one's not quite
             like the last.
           </Text>
-          <p>{`API: ${gameAPI}${btoa(userId)}`}</p>
+          <Text
+            sx={{
+              marginTop: "0.5rem",
+              fontSize: "1rem",
+              textAlign: "center",
+              fontWeight: "700",
+            }}
+          >{`API: ${gameAPI}${btoa(userId)}`}</Text>
         </Box>
-        <form onSubmit={!loading ? handleFlagSubmit : ""}>
+        <form onSubmit={!loading && handleFlagSubmit}>
           <Box
             display="flex"
             alignItems="center"
