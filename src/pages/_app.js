@@ -20,6 +20,7 @@ export default function App({ Component, pageProps }) {
           <Toaster position="top-center" />
           <Head>
             <title>Game | IEDC MEC</title>
+            <meta name="viewport" content="width=800" />
             <Script
               strategy="lazyOnload"
               src={`https://www.googletagmanager.com/gtag/js?id=G-DY0PT292WB`}
