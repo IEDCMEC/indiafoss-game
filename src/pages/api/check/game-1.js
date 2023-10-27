@@ -29,7 +29,6 @@ export default async function handler(req, res) {
       .eq("id", userId[0].id);
 
     if (error) {
-      console.log(error);
       return res.status(500).json({
         error: "Something went wrong.",
       });

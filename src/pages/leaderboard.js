@@ -19,13 +19,11 @@ function Leaderboard() {
     const res = await axios.get("/api/leaderboard");
 
     if (res.status === 200) setLeaderboard(res.data);
-    else console.log(res.data);
   };
 
   useEffect(() => {
     fetchLeaderBoard();
   }, []);
-  console.log(leaderboard.data);
   return (
     // <>
     //   <p>{JSON.stringify(leaderboard)}</p>

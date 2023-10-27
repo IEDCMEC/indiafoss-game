@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Flex, Box, Heading, Text, Avatar } from "@chakra-ui/react";
-import { useContext } from "react";
-import { ContextProvider } from "@/contexts/ContextApi";
 import { useTimer } from "@/contexts/Timer";
 const Navbar = ({ gamename }) => {
-  const { formData } = useContext(ContextProvider);
-  // console.log(formData.name)
   const [data, setData] = useState({});
   useEffect(() => {
     setData(JSON.parse(window.localStorage.getItem("data")));
-    // console.log(data)
   }, []);
   const timer = useTimer();
-  // console.log(timer)
+
   return (
     <Flex
       justify="space-between"
@@ -33,7 +28,9 @@ const Navbar = ({ gamename }) => {
         </Heading>
       </Box>
       <Box>
-        <Text fontSize="1.3rem">Time Left : <b>{timer.timer}</b> s</Text>
+        <Text fontSize="1.3rem">
+          Time Left : <b>{timer.timer}</b> s
+        </Text>
         <Flex alignItems="center">
           <Avatar size="sm" name={data?.name} src="/avatar.jpg" mr={2} />
           <Text fontSize="sm">{data?.email}</Text>

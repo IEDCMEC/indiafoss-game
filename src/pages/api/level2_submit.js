@@ -23,8 +23,6 @@ export default async function handler(req, res) {
         },
       ]);
 
-      console.log(data, error);
-
     return res.status(200).json({
         message: "Submission Successful",
     });

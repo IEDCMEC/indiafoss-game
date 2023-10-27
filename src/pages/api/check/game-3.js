@@ -17,8 +17,6 @@ export default async function handler(req, res) {
 
     let newFlag = generateUniqueFlag(userId[0].id.toString());
 
-    console.log(`${game3FlagStaticPart}${newFlag}}`);
-
     if (flag != `${game3FlagStaticPart}${newFlag}}`) {
       return res.status(204).json({
         error: "Wrong Flag !",
@@ -31,7 +29,6 @@ export default async function handler(req, res) {
       .eq("id", userId[0].id);
 
     if (error) {
-      console.log(error);
       return res.status(500).json({
         error: "Something went wrong.",
       });
