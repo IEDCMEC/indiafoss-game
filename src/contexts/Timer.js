@@ -10,13 +10,13 @@ export const TimerProvider = ({ children }) => {
   const [seconds, setSeconds] = useState(600);
 
   useEffect(() => {
-    // If there is a timer in localStorage, use that value
     if (window.localStorage.getItem("progressing") === "true") {
       const timerFromLocalStorage = window.localStorage.getItem("timer");
       if (timerFromLocalStorage) {
         setSeconds(parseInt(timerFromLocalStorage));
       }
     }
+
     const timer = setInterval(() => {
       if (window.localStorage.getItem("progressing") === "true") {
         setSeconds((prevSeconds) => {
@@ -33,10 +33,12 @@ export const TimerProvider = ({ children }) => {
   }, []);
 
   return (
-    <TimerContext.Provider value={{
-      timer: seconds,
-      setSeconds: setSeconds,
-    }} >
+    <TimerContext.Provider
+      value={{
+        timer: seconds,
+        setSeconds: setSeconds,
+      }}
+    >
       {children}
     </TimerContext.Provider>
   );

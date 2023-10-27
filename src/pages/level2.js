@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import {
   Box,
   Heading,
@@ -17,9 +17,9 @@ import { ContextProvider } from "@/contexts/ContextApi";
 function Level2Submission() {
   const { formData, setFormData, validationErrors, setValidationErrors } =
     useContext(ContextProvider);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Perform validation here (e.g., check if email is valid, etc.)
     const newValidationErrors = {};
 
     if (!formData.name) {
@@ -44,6 +44,7 @@ function Level2Submission() {
       setValidationErrors(newValidationErrors);
     } else {
       const res = await axios.post("/api/level2_submit", formData);
+
       if (res.status === 200) {
         toast.success("Submission Successful !");
         setFormData({
@@ -52,14 +53,13 @@ function Level2Submission() {
           phoneNumber: "",
           flag: "",
         });
+
         return;
       }
     }
   };
 
   const isValidEmail = (email) => {
-    // You can implement your email validation logic here
-    // For a simple example, we're checking for the presence of an '@' character
     return email.includes("@");
   };
 

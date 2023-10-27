@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-
 import generateUniqueFlag from "@/utils/UniqueFlag";
 import { Box, Text } from "@chakra-ui/react";
 import CustomForm from "@/Components/CustomForm";
-import { Heading } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import { useTimer } from "@/contexts/Timer";
 import Navbar from "@/Components/Navbar";
@@ -12,8 +10,7 @@ import Footer from "@/Components/Footer";
 import toast from "react-hot-toast";
 import axios from "axios";
 
-const game6FlagStaticPart = "flag{dskajfhsdhk";
-const gameScore = 6;
+const game6FlagStaticPart = process.env.NEXT_PUBLIC_STATIC_SIX;
 const game7URL = "/Z2FtZS03";
 
 export default function Game6() {
@@ -37,7 +34,6 @@ export default function Game6() {
     const res = await axios.post("/api/check/game-6", {
       authToken: window.localStorage.getItem("token"),
       flag: submission,
-      score: gameScore,
       timeTaken: 600 - timer,
     });
 

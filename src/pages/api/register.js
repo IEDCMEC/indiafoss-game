@@ -3,9 +3,13 @@ import jwt from "jsonwebtoken"
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
+    const secret = process.env.SECRET
+
     const {
       body: { name, email, phoneNumber },
     } = req;
+
+    const token = jwt.sign(email,secret)
 
     if (!name || !email ) {
       return res.status(400).json({
@@ -23,10 +27,6 @@ export default async function handler(req, res) {
         },
       ])
       .select("id, name, email");
-
-
-    const secret = process.env.SECRET
-    const token = jwt.sign(email,secret)
 
     if (error) {
       if (

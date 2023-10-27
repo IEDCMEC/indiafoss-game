@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-
 import generateUniqueFlag from "@/utils/UniqueFlag";
 import { useTimer } from "@/contexts/Timer";
 import { Box, Button } from "@chakra-ui/react";
@@ -14,7 +13,6 @@ import toast from "react-hot-toast";
 const game1FlagStaticPart = process.env.NEXT_PUBLIC_STATIC_ONE;
 const game3FlagStaticPart = process.env.NEXT_PUBLIC_STATIC_THREE;
 
-const gameScore = 1;
 const game2URL = "/Z2FtZS0z";
 
 export default function Game1() {
@@ -95,14 +93,8 @@ export default function Game1() {
         width={{ base: "95vw", sm: "400px" }}
         border="2px solid #094074"
         borderRadius={"md"}
-        // backgroundColor="white"
         padding={"2rem"}
         minHeight="300px"
-        // sx={{
-        //   '&:hover':{
-        //     border: '2px solid #190482'
-        //   }
-        // }}
       >
         <Box
           display="flex"
@@ -131,7 +123,6 @@ export default function Game1() {
             To uncover the flag, in pixels you must delve. Find your way where
             tags and attributes dwell.{" "}
           </Text>
-          {/* <p>Time Left: {timer}</p> */}
         </Box>
         <Box></Box>
         <Box>
@@ -153,15 +144,6 @@ export default function Game1() {
             flexDirection={"column"}
             width={"350px"}
           >
-            {/* <label htmlFor="submission">Flag</label>
-          <input
-            id="submission"
-            type="text"
-            value={submission}
-            onChange={(e) => {
-              setSubmission(e.target.value);
-            }}
-          /> */}
             <CustomForm
               id="submission"
               type="text"

@@ -10,7 +10,6 @@ function Complete() {
   const router = useRouter();
   const { setSeconds } = useTimer();
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [score, setScore] = useState(0);
   const [time, setTime] = useState(0);
 
@@ -21,7 +20,6 @@ function Complete() {
 
     if (res) {
       setName(res.data[0].name);
-      setEmail(res.data[0].email);
       setScore(res.data[0].score);
       setTime(res.data[0].time_taken);
     }

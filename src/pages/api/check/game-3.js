@@ -5,9 +5,11 @@ import jwt from "jsonwebtoken";
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const game3FlagStaticPart = process.env.NEXT_PUBLIC_STATIC_THREE;
+
     const token = req.body.authToken;
     const flag = req.body.flag;
     const timeTaken = req.body.timeTaken;
+
     const email = await jwt.verify(token, process.env.SECRET);
 
     const { data: userId } = await supabaseClient
@@ -23,7 +25,7 @@ export default async function handler(req, res) {
       });
     }
 
-    const { data, error } = await supabaseClient
+    const { error } = await supabaseClient
       .from("players")
       .update({ score: userId[0].score + 1, time_taken: timeTaken })
       .eq("id", userId[0].id);
@@ -33,6 +35,7 @@ export default async function handler(req, res) {
         error: "Something went wrong.",
       });
     }
+
     return res.status(200).json({
       message: "Success",
     });

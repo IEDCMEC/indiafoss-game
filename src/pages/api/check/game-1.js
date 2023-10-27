@@ -2,13 +2,14 @@ import { supabaseClient } from "@/utils/supabase";
 import jwt from "jsonwebtoken";
 import generateUniqueFlag from "@/utils/UniqueFlag";
 
-
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const game1FlagStaticPart = process.env.NEXT_PUBLIC_STATIC_ONE;
+
     const token = req.body.authToken;
     const flag = req.body.flag;
     const timeTaken = req.body.timeTaken;
+
     const email = await jwt.verify(token, process.env.SECRET);
 
     const { data: userId } = await supabaseClient
@@ -17,13 +18,13 @@ export default async function handler(req, res) {
       .eq("email", email);
 
     let newFlag = generateUniqueFlag(userId[0].id.toString());
-   
+
     if (flag != `${game1FlagStaticPart}${newFlag}}`) {
       return res.status(204).json({
         error: "Wrong Flag !",
       });
     }
-    const { data, error } = await supabaseClient
+    const { error } = await supabaseClient
       .from("players")
       .update({ score: userId[0].score + 1, time_taken: timeTaken })
       .eq("id", userId[0].id);
@@ -33,6 +34,7 @@ export default async function handler(req, res) {
         error: "Something went wrong.",
       });
     }
+
     return res.status(200).json({
       message: "Success",
     });
