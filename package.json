@@ -17,6 +17,7 @@
     "framer-motion": "^10.16.4",
     "jsonwebtoken": "^9.0.2",
     "next": "latest",
+    "nodemailer": "^6.9.7",
     "react": "latest",
     "react-dom": "latest",
     "react-hot-toast": "^2.4.1",
