@@ -19,10 +19,11 @@ function Leaderboard() {
     <Box
       display={"flex"}
       alignItems="center"
-      justifyContent={"center"}
+      justifyContent={"flex-start"}
       flexDirection={"column"}
       backgroundColor="#c2d0dd"
       minHeight={"100vh"}
+      padding={"4rem"}
     >
       <Text fontSize={"2.5rem"} fontWeight={"600"} color={"black"} mb={"50px"}>
         Leaderboard
