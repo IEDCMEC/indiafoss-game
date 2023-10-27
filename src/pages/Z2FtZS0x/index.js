@@ -148,7 +148,7 @@ export default function Game1() {
             </Box>
           </Box>
         </Box>
-        <form onSubmit={handleFlagSubmit}>
+        <form onSubmit={!loading ? handleFlagSubmit : ""}>
           <Box
             display="flex"
             alignItems="center"

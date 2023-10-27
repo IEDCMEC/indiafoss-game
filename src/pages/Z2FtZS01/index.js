@@ -102,10 +102,9 @@ export default function Game5() {
             Head to a path you were already past, but alas this one's not quite
             like the last.
           </Text>
-          {/* <p>Time Left: {timer}</p> */}
           <p>{`API: ${gameAPI}${btoa(userId)}`}</p>
         </Box>
-        <form onSubmit={handleFlagSubmit}>
+        <form onSubmit={!loading ? handleFlagSubmit : ""}>
           <Box
             display="flex"
             alignItems="center"

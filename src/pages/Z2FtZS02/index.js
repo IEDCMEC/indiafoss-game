@@ -128,7 +128,7 @@ export default function Game6() {
             Access granted with the organizers' heart.
           </Text>
         </Box>
-        <form onSubmit={handleFlagSubmit}>
+        <form onSubmit={!loading ? handleFlagSubmit : ""}>
           <Box
             display="flex"
             alignItems="center"

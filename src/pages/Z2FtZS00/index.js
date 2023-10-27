@@ -101,7 +101,7 @@ export default function Game4() {
           </Text>
           <p>{`API: ${gameAPI}${btoa(userId)}`}</p>
         </Box>
-        <form onSubmit={handleFlagSubmit}>
+        <form onSubmit={!loading ? handleFlagSubmit : ""}>
           <Box
             display="flex"
             alignItems="center"

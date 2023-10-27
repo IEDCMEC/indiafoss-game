@@ -114,7 +114,7 @@ export default function Game3() {
             Pick up the crumbs along the way on the trail to your sweet reward.
           </Text>
         </Box>
-        <form onSubmit={handleFlagSubmit}>
+        <form onSubmit={!loading ? handleFlagSubmit : ""}>
           <Box
             display="flex"
             alignItems="center"

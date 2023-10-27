@@ -127,7 +127,7 @@ export default function Game7() {
             Access granted with the organizers' heart.
           </Text>
         </Box>
-        <form onSubmit={handleFlagSubmit}>
+        <form onSubmit={!loading ? handleFlagSubmit : ""}>
           <Box
             display="flex"
             alignItems="center"
@@ -159,7 +159,7 @@ export default function Game7() {
           </Box>
         </form>
       </Box>
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={!loading1 ? handleFormSubmit : ""}>
         <Box
           flexDirection={"column"}
           display="flex"
