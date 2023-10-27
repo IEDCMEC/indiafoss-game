@@ -117,7 +117,7 @@ export default function Game7() {
               fontWeight: "500",
             }}
           >
-            Access granted with the organizers' heart.
+            The final clue will take you to the summit. Search in the depths till u uncover the gold.
           </Text>
         </Box>
         <form onSubmit={!loading && handleFlagSubmit}>
