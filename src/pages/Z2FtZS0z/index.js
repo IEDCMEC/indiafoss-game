@@ -28,6 +28,12 @@ export default function Game3() {
 
   const handleFlagSubmit = async (e) => {
     e.preventDefault();
+
+    if(submission.length == 0){
+      toast.error("Please enter the flag");
+      return;
+    }
+    
     const res = await axios.post("/api/check/game-3", {
       authToken: window.localStorage.getItem("token"),
       flag: submission,

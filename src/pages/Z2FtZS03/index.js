@@ -23,6 +23,12 @@ export default function Game7() {
 
   const handleFlagSubmit = async (e) => {
     e.preventDefault();
+
+    if(submission.length == 0){
+      toast.error("Please enter the flag");
+      return;
+    }
+    
     const res = await axios.post("/api/check/game-7", {
       authToken: window.localStorage.getItem("token"),
       flag: submission,
@@ -53,6 +59,12 @@ export default function Game7() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+
+    if(username.length == 0 || password.length == 0){
+      toast.error("Please Enter the Credentials.");
+      return;
+    }
+
     const { data, error } = await supabasePublicClient
       .from("users")
       .select("*")
