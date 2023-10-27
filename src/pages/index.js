@@ -8,6 +8,7 @@ import {
   Button,
   Alert,
   AlertIcon,
+  Text,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -81,6 +82,9 @@ function Home() {
         <Heading as="h1" size="2xl" mb={6}>
           Capture The Flag 🚩 !
         </Heading>
+        <Text fontSize="xl" textAlign="center" color="#701009" mb={6}>
+          * Read the instructions carefully after entering the game.
+        </Text>
         <Box
           width={{ base: "95vw", md: "100%" }}
           maxW="400px"

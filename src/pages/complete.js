@@ -74,9 +74,6 @@ function Complete() {
               <Text fontSize="xl" size="md" mb={4} color="black">
                 Score : <b>{score}</b>
               </Text>
-              <Text fontSize="xl" size="md" mb={4} color="black">
-                Time Taken : <b>{time} seconds</b>
-              </Text>
             </>
           )}
 
