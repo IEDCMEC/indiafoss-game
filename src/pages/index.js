@@ -53,6 +53,12 @@ function Home() {
         return;
       }
 
+      setFormData({
+        name: "",
+        email: "",
+        phoneNumber: "",
+      });
+
       window.localStorage.setItem("progressing", true);
       window.localStorage.setItem("token", res.data.token);
       window.localStorage.setItem("TheGameUserId", res.data.data[0].id);
