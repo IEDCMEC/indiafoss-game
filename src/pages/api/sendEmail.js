@@ -1,17 +1,18 @@
 import nodemailer from "nodemailer";
 
 export default async function handler(req, res) {
-  const { toEmail, secret } = req.body;
+  if (req.method === "POST") {
+    const { toEmail, secret } = req.body;
 
-  const expectedSecret = process.env.NEXT_PUBLIC_MAIL_SECRET;
+    const expectedSecret = process.env.NEXT_PUBLIC_MAIL_SECRET;
 
-  const decodedSecret = Buffer.from(secret, "base64").toString("ascii");
+    const decodedSecret = Buffer.from(secret, "base64").toString("ascii");
 
-  if (decodedSecret !== expectedSecret) {
-    return res.status(401).json({ message: "Unauthorized" });
-  }
+    if (decodedSecret !== expectedSecret) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
 
-  const mailHtml = `
+    const mailHtml = `
     <html>
     <body>
     <p>Heyy Participant,</p>
@@ -27,27 +28,32 @@ export default async function handler(req, res) {
     </html>
   `;
 
-  const subject = "Invitation to Take the Hard Level Test | IEDC MEC";
+    const subject = "Invitation to Take the Hard Level Test | IEDC MEC";
 
-  var transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.NODEMAILER_EMAIL,
-      pass: process.env.NODEMAILER_PW,
-    },
-  });
+    var transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.NODEMAILER_EMAIL,
+        pass: process.env.NODEMAILER_PW,
+      },
+    });
 
-  var mailOptions = {
-    from: process.env.NODEMAILER_EMAIL,
-    to: toEmail,
-    subject: subject,
-    html: mailHtml,
-  };
+    var mailOptions = {
+      from: process.env.NODEMAILER_EMAIL,
+      to: toEmail,
+      subject: subject,
+      html: mailHtml,
+    };
 
-  const { error, info } = await transporter.sendMail(mailOptions);
-  if (error) {
-    res.status(500).json({ message: "Error sending email" });
-  } else {
-    res.status(200).json({ message: "Email sent successfully" });
+    const { error, info } = await transporter.sendMail(mailOptions);
+    if (error) {
+      res.status(500).json({ message: "Error sending email" });
+    } else {
+      res.status(200).json({ message: "Email sent successfully" });
+    }
+  }
+  else
+  {
+    res.status(405).json({ message: "Method not allowed" });
   }
 }
