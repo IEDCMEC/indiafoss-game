@@ -9,6 +9,7 @@ import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { PulseLoader } from "react-spinners";
 
 const game3FlagStaticPart = process.env.NEXT_PUBLIC_STATIC_THREE;
 const game4URL = "/Z2FtZS00";
@@ -19,6 +20,7 @@ export default function Game3() {
 
   const [flag, setFlag] = useState("");
   const [submission, setSubmission] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const fetchUniqueFlag = () => {
     const userId = window.localStorage.getItem("TheGameUserId");
@@ -29,16 +31,20 @@ export default function Game3() {
   const handleFlagSubmit = async (e) => {
     e.preventDefault();
 
-    if(submission.length == 0){
+    if (submission.length == 0) {
       toast.error("Please enter the flag");
       return;
     }
-    
+
+    setLoading(true);
+
     const res = await axios.post("/api/check/game-3", {
       authToken: window.localStorage.getItem("token"),
       flag: submission,
       timeTaken: 600 - timer,
     });
+
+    setLoading(false);
 
     if (res.status == 200) {
       toast.success("Correct Flag 🚩!!");
@@ -135,7 +141,7 @@ export default function Game3() {
               color="white"
               type="submit"
             >
-              Submit
+              {loading ? <PulseLoader color={"#ffffff"} size={10} /> : "Submit"}
             </Button>
           </Box>
         </form>

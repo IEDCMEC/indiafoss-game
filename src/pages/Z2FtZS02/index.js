@@ -9,6 +9,7 @@ import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { PulseLoader } from "react-spinners";
 
 const game6FlagStaticPart = process.env.NEXT_PUBLIC_STATIC_SIX;
 const game7URL = "/Z2FtZS03";
@@ -22,6 +23,7 @@ export default function Game6() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const fetchUniqueFlag = () => {
     const userId = window.localStorage.getItem("TheGameUserId");
@@ -32,25 +34,27 @@ export default function Game6() {
   const handleFlagSubmit = async (e) => {
     e.preventDefault();
 
-    if(submission.length == 0){
+    if (submission.length == 0) {
       toast.error("Please enter the flag");
       return;
     }
-    
+
+    setLoading(true);
+
     const res = await axios.post("/api/check/game-6", {
       authToken: window.localStorage.getItem("token"),
       flag: submission,
       timeTaken: 600 - timer,
     });
 
+    setLoading(false);
+
     if (res.status == 200) {
       toast.success("Correct Flag 🚩!!");
       router.replace(game7URL);
-    }
-    else if(res.status==204)
-    {
+    } else if (res.status == 204) {
       toast.error("Wrong Flag!!");
-      setSubmission("")
+      setSubmission("");
     }
   };
 
@@ -70,8 +74,8 @@ export default function Game6() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    
-    if(username.length == 0 || password.length == 0){
+
+    if (username.length == 0 || password.length == 0) {
       toast.error("Please Enter the Credentials.");
       return;
     }
@@ -79,9 +83,7 @@ export default function Game6() {
     const hiddenPassword = process.env.NEXT_PUBLIC_URL_PASSWORD;
     if (username == hiddenPassword && password == hiddenPassword) {
       await fetch(`/next-page/id={${flag}}`);
-    }
-    else
-    {
+    } else {
       toast.error("Wrong Credentials!");
     }
   };
@@ -107,11 +109,6 @@ export default function Game6() {
         borderRadius={"md"}
         padding={"2rem"}
         minHeight="300px"
-        // sx={{
-        //   '&:hover':{
-        //     border: '2px solid #190482'
-        //   }
-        // }}
       >
         <Box
           display="flex"
@@ -130,7 +127,6 @@ export default function Game6() {
           >
             Access granted with the organizers' heart.
           </Text>
-          {/* <p>Time Left: {timer}</p> */}
         </Box>
         <form onSubmit={handleFlagSubmit}>
           <Box
@@ -140,15 +136,6 @@ export default function Game6() {
             flexDirection={"column"}
             width={"350px"}
           >
-            {/* <label htmlFor="submission">Flag</label>
-          <input
-            id="submission"
-            type="text"
-            value={submission}
-            onChange={(e) => {
-              setSubmission(e.target.value);
-            }}
-          /> */}
             <CustomForm
               id="submission"
               type="text"
@@ -168,7 +155,7 @@ export default function Game6() {
               color="white"
               type="submit"
             >
-              Submit
+              {loading ? <PulseLoader color={"#ffffff"} size={10} /> : "Submit"}
             </Button>
           </Box>
         </form>

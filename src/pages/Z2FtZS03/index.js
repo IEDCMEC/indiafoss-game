@@ -9,6 +9,7 @@ import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { PulseLoader } from "react-spinners";
 
 const game8URL = "/complete";
 
@@ -18,22 +19,27 @@ export default function Game7() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const [loading, setLoading] = useState(false);
+  const [loading1, setLoading1] = useState(false);
   const [submission, setSubmission] = useState("");
 
   const handleFlagSubmit = async (e) => {
     e.preventDefault();
 
-    if(submission.length == 0){
+    if (submission.length == 0) {
       toast.error("Please enter the flag");
       return;
     }
-    
+
+    setLoading(true);
+
     const res = await axios.post("/api/check/game-7", {
       authToken: window.localStorage.getItem("token"),
       flag: submission,
       timeTaken: 600 - timer,
     });
+
+    setLoading(false);
 
     if (res.status == 200) {
       toast.success("Correct Flag 🚩!!");
@@ -60,16 +66,20 @@ export default function Game7() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    if(username.length == 0 || password.length == 0){
+    if (username.length == 0 || password.length == 0) {
       toast.error("Please Enter the Credentials.");
       return;
     }
+
+    setLoading1(true);
 
     const { data, error } = await supabasePublicClient
       .from("users")
       .select("*")
       .eq("username", username)
       .eq("password", password);
+
+    setLoading1(false);
 
     if (data.length > 0) {
     } else {
@@ -144,7 +154,7 @@ export default function Game7() {
               color="white"
               type="submit"
             >
-              Submit
+              {loading ? <PulseLoader color={"#ffffff"} size={10} /> : "Submit"}
             </Button>
           </Box>
         </form>
@@ -193,7 +203,11 @@ export default function Game7() {
               color="white"
               type="submit"
             >
-              Submit
+              {loading1 ? (
+                <PulseLoader color={"#ffffff"} size={10} />
+              ) : (
+                "Submit"
+              )}
             </Button>
           </Box>
         </Box>

@@ -14,9 +14,11 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import Footer from "@/Components/Footer";
 import { ContextProvider } from "@/contexts/ContextApi";
+import { PulseLoader } from "react-spinners";
 
 function Home() {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const { formData, setFormData, validationErrors, setValidationErrors } =
     useContext(ContextProvider);
@@ -37,8 +39,9 @@ function Home() {
     if (newValidationErrors.name || newValidationErrors.email) {
       setValidationErrors(newValidationErrors);
     } else {
+      setLoading(true);
       const res = await axios.post("/api/register", formData);
-
+      setLoading(false);
       if (res.data.isRegistered === true) {
         toast.error("Email Already Used.");
         setFormData({
@@ -162,7 +165,7 @@ function Home() {
             color="white"
             w={"100%"}
           >
-            Play Game
+            {loading ? <PulseLoader color={"#ffffff"} size={10} /> : "Submit"}
           </Button>
         </form>
       </Box>
