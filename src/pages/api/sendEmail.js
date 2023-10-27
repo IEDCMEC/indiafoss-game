@@ -45,15 +45,32 @@ export default async function handler(req, res) {
       html: mailHtml,
     };
 
-    const { error, info } = await transporter.sendMail(mailOptions);
-    if (error) {
-      res.status(500).json({ message: "Error sending email" });
-    } else {
-      res.status(200).json({ message: "Email sent successfully" });
+    const server = await new Promise((resolve, reject) => {
+      transporter.verify(function (error, success) {
+        if (success) {
+          resolve(success);
+        }
+        reject(error);
+      });
+    });
+    if (!server) {
+      res.status(500).json({ error: "Error failed" });
     }
-  }
-  else
-  {
+
+    const success = await new Promise((resolve, reject) => {
+      transporter.sendMail(mailOptions).then((info, err) => {
+        if (info.response.includes("250")) {
+          resolve(true);
+        }
+        reject(err);
+      });
+    });
+
+    if (!success) {
+      res.status(500).json({ error: "Error sending email" });
+    }
+    res.status(200).json({ success: success });
+  } else {
     res.status(405).json({ message: "Method not allowed" });
   }
 }
