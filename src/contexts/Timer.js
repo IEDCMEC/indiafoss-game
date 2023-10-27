@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 export const TimerContext = createContext();
@@ -8,6 +9,7 @@ export const useTimer = () => {
 
 export const TimerProvider = ({ children }) => {
   const [seconds, setSeconds] = useState(600);
+  const router = useRouter();
 
   useEffect(() => {
     if (window.localStorage.getItem("progressing") === "true") {
@@ -31,6 +33,15 @@ export const TimerProvider = ({ children }) => {
       clearInterval(timer);
     };
   }, []);
+
+  useEffect(() => {
+    if (seconds < 1) {
+      window.alert("Time's up!");
+      setSeconds(600);
+      window.localStorage.setItem("progressing", "false");
+      router.replace("/complete");
+    }
+  }, [seconds]);
 
   return (
     <TimerContext.Provider

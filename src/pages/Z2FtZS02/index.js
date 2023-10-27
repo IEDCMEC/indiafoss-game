@@ -65,13 +65,6 @@ export default function Game6() {
     fetchUniqueFlag();
   }, []);
 
-  useEffect(() => {
-    if (timer < 1) {
-      window.alert("Time's up!");
-      router.replace("/complete");
-    }
-  }, [timer]);
-
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -128,7 +121,7 @@ export default function Game6() {
             Access granted with the organizers' heart.
           </Text>
         </Box>
-        <form onSubmit={!loading ? handleFlagSubmit : ""}>
+        <form onSubmit={!loading && handleFlagSubmit}>
           <Box
             display="flex"
             alignItems="center"
