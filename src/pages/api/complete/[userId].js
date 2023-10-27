@@ -1,10 +1,8 @@
 import { supabaseClient } from "@/utils/supabase";
-import jwt from "jsonwebtoken";
 
 export default async function handler(req, res) {
   if (req.method === "GET") {
-
-    const {userId} = req.query;
+    const { userId } = req.query;
 
     if (!userId) {
       return res.status(400).json({

@@ -2,18 +2,15 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Box, Text } from "@chakra-ui/react";
 import CustomForm from "@/Components/CustomForm";
-import { Heading } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import generateUniqueFlag from "@/utils/UniqueFlag";
-
 import { useTimer } from "@/contexts/Timer";
 import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-const game3FlagStaticPart = "flag{dfsafewcvascd";
-const gameScore = 3;
+const game3FlagStaticPart = process.env.NEXT_PUBLIC_STATIC_THREE;
 const game4URL = "/Z2FtZS00";
 
 export default function Game3() {
@@ -40,11 +37,9 @@ export default function Game3() {
     if (res.status == 200) {
       toast.success("Correct Flag 🚩!!");
       router.replace(game4URL);
-    }
-    else if(res.status==204)
-    {
+    } else if (res.status == 204) {
       toast.error("Wrong Flag!!");
-      setSubmission("")
+      setSubmission("");
     }
   };
 
@@ -88,11 +83,6 @@ export default function Game3() {
         borderRadius={"md"}
         padding={"2rem"}
         minHeight="300px"
-        // sx={{
-        //   '&:hover':{
-        //     border: '2px solid #190482'
-        //   }
-        // }}
       >
         <Box
           display="flex"
@@ -101,7 +91,7 @@ export default function Game3() {
           flexDirection={"column"}
           mb={5}
         >
-        <Text
+          <Text
             as="h4"
             sx={{
               fontSize: "1.25rem",
@@ -111,7 +101,6 @@ export default function Game3() {
           >
             Pick up the crumbs along the way on the trail to your sweet reward.
           </Text>
-          {/* <p>Time Left: {timer}</p> */}
         </Box>
         <form onSubmit={handleFlagSubmit}>
           <Box
@@ -121,15 +110,6 @@ export default function Game3() {
             flexDirection={"column"}
             width={"350px"}
           >
-            {/* <label htmlFor="submission">Flag</label>
-          <input
-            id="submission"
-            type="text"
-            value={submission}
-            onChange={(e) => {
-              setSubmission(e.target.value);
-            }}
-          /> */}
             <CustomForm
               id="submission"
               type="text"

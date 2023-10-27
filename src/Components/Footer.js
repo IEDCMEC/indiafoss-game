@@ -7,6 +7,7 @@ import InstagramIcon from "@/utils/InstagramIcon";
 import TwitterIcon from "@/utils/TwitterIcon";
 import MetaIcon from "@/utils/MetaIcon";
 import LinkedinIcon from "@/utils/LinkedinIcon";
+
 const Footer = () => {
   return (
     <Box
@@ -18,16 +19,15 @@ const Footer = () => {
       bottom={"0"}
       width={"100vw"}
       minHeight={{ base: "50px", md: "100px" }}
-      mb={'0px'}
+      mb={"0px"}
     >
-      {/* 400/115 */}
       <Box
         display={"flex"}
         alignItems="center"
         justifyContent={"space-between"}
         width={{ base: "95vw", md: "85vw" }}
         flexDirection={{ base: "column", md: "row" }}
-        height='100px'
+        height="100px"
       >
         <Image
           src={iedclogo}
@@ -40,38 +40,61 @@ const Footer = () => {
           justifyContent={"center"}
           width={{ base: "95vw", md: "40vw" }}
           flexDirection={"column"}
-          height={'100%'}
+          height={"100%"}
         >
           <Box
             w="45%"
             display={"flex"}
             alignItems="center"
             justifyContent={"space-between"}
-            marginRight={'65px'}
+            marginRight={"65px"}
             flexDirection={"row"}
-            mb={'10px'}
-            height={'30%'}
+            mb={"10px"}
+            height={"30%"}
           >
-            <Icon viewBox='0 0 200 200' height={'1.4em'} width='1.4em' cursor={'pointer'} color='black.500'>
-              <InstagramIcon height={200} width={200}/>
+            <Icon
+              viewBox="0 0 200 200"
+              height={"1.4em"}
+              width="1.4em"
+              cursor={"pointer"}
+              color="black.500"
+            >
+              <InstagramIcon height={200} width={200} />
             </Icon>
-            <Icon viewBox='0 0 200 200' height={'1.4em'} width='1.4em' cursor={'pointer'} color='black.500'>
-              <TwitterIcon height={200} width={200}/>
+            <Icon
+              viewBox="0 0 200 200"
+              height={"1.4em"}
+              width="1.4em"
+              cursor={"pointer"}
+              color="black.500"
+            >
+              <TwitterIcon height={200} width={200} />
             </Icon>
-            <Icon viewBox='0 0 200 200' height={'1.4em'} width='1.4em' cursor={'pointer'} color='black.500'>
-              <MetaIcon height={200} width={200}/>
+            <Icon
+              viewBox="0 0 200 200"
+              height={"1.4em"}
+              width="1.4em"
+              cursor={"pointer"}
+              color="black.500"
+            >
+              <MetaIcon height={200} width={200} />
             </Icon>
-            <Icon viewBox='0 0 200 200' height={'1.4em'} width='1.4em' cursor={'pointer'} color='black.500'>
-              <LinkedinIcon height={200} width={200}/>
+            <Icon
+              viewBox="0 0 200 200"
+              height={"1.4em"}
+              width="1.4em"
+              cursor={"pointer"}
+              color="black.500"
+            >
+              <LinkedinIcon height={200} width={200} />
             </Icon>
           </Box>
           <p
             style={{
-              // width: "100%",
               textAlign: "center",
               fontSize: "1.3rem",
               color: "black",
-              marginRight:'65px'
+              marginRight: "65px",
             }}
           >
             Made with 💙 MEC

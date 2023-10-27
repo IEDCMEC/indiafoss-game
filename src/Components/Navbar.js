@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Flex, Box, Heading, Text, Avatar } from "@chakra-ui/react";
 import { useTimer } from "@/contexts/Timer";
-const Navbar = ({ gamename }) => {
+
+const Navbar = () => {
   const [data, setData] = useState({});
   useEffect(() => {
     setData(JSON.parse(window.localStorage.getItem("data")));

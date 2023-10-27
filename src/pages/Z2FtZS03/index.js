@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-
 import { supabasePublicClient } from "@/utils/supabasePublic";
 import { Box, Text } from "@chakra-ui/react";
 import CustomForm from "@/Components/CustomForm";
-import { Heading } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import { useTimer } from "@/contexts/Timer";
 import Navbar from "@/Components/Navbar";
@@ -12,7 +10,6 @@ import Footer from "@/Components/Footer";
 import toast from "react-hot-toast";
 import axios from "axios";
 
-const gameScore = 7;
 const game8URL = "/complete";
 
 export default function Game7() {
@@ -22,7 +19,6 @@ export default function Game7() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const [flag, setFlag] = useState("");
   const [submission, setSubmission] = useState("");
 
   const handleFlagSubmit = async (e) => {
@@ -30,7 +26,6 @@ export default function Game7() {
     const res = await axios.post("/api/check/game-7", {
       authToken: window.localStorage.getItem("token"),
       flag: submission,
-      score: gameScore,
       timeTaken: 600 - timer,
     });
 
@@ -71,43 +66,6 @@ export default function Game7() {
   };
 
   return (
-    // <div>
-    //   <div>
-    //     <h1>Sup</h1>
-    //     {timer}
-    //   </div>
-    //   <form>
-    //     <label htmlFor="username">Username</label>
-    //     <input
-    //       id="username"
-    //       type="text"
-    //       name="username"
-    //       value={username}
-    //       onChange={(e) => setUsername(e.target.value)}
-    //     />
-    //     <label htmlFor="password">Password</label>
-    //     <input
-    //       id="password"
-    //       type="password"
-    //       name="password"
-    //       value={password}
-    //       onChange={(e) => setPassword(e.target.value)}
-    //     />
-    //     <input type="submit" value="Submit" onClick={handleFormSubmit} />
-    //   </form>
-    //   <div>
-    //     <label htmlFor="submission">Flag</label>
-    //     <input
-    //       id="submission"
-    //       type="text"
-    //       value={submission}
-    //       onChange={(e) => {
-    //         setSubmission(e.target.value);
-    //       }}
-    //     />
-    //     <button onClick={handleFlagSubmit}>Submit</button>
-    //   </div>
-    // </div>
     <Box
       backgroundColor="#c2d0dd"
       height="100vh"
@@ -128,11 +86,6 @@ export default function Game7() {
         borderRadius={"md"}
         padding={"2rem"}
         minHeight="300px"
-        // sx={{
-        //   '&:hover':{
-        //     border: '2px solid #190482'
-        //   }
-        // }}
       >
         <Box
           display="flex"
@@ -151,7 +104,6 @@ export default function Game7() {
           >
             Access granted with the organizers' heart.
           </Text>
-          {/* <p>Time Left: {timer}</p> */}
         </Box>
         <form onSubmit={handleFlagSubmit}>
           <Box
@@ -161,15 +113,6 @@ export default function Game7() {
             flexDirection={"column"}
             width={"350px"}
           >
-            {/* <label htmlFor="submission">Flag</label>
-        <input
-          id="submission"
-          type="text"
-          value={submission}
-          onChange={(e) => {
-            setSubmission(e.target.value);
-          }}
-        /> */}
             <CustomForm
               id="submission"
               type="text"

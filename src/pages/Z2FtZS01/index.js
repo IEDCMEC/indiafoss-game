@@ -1,17 +1,15 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-
 import { useTimer } from "@/contexts/Timer";
 import { Box, Text } from "@chakra-ui/react";
 import CustomForm from "@/Components/CustomForm";
-import { Heading } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
 import axios from "axios";
 import toast from "react-hot-toast";
+
 const gameAPI = "/api/Z2FtZS01/";
-const gameScore = 5;
 const game6URL = "/Z2FtZS02";
 
 export default function Game5() {
@@ -32,11 +30,9 @@ export default function Game5() {
     if (res.status == 200) {
       toast.success("Correct Flag 🚩!!");
       router.replace(game6URL);
-    }
-    else if(res.status==204)
-    {
+    } else if (res.status == 204) {
       toast.error("Wrong Flag!!");
-      setSubmission("")
+      setSubmission("");
     }
   };
 
@@ -75,11 +71,6 @@ export default function Game5() {
         borderRadius={"md"}
         padding={"2rem"}
         minHeight="300px"
-        // sx={{
-        //   '&:hover':{
-        //     border: '2px solid #190482'
-        //   }
-        // }}
       >
         <Box
           display="flex"
@@ -88,7 +79,7 @@ export default function Game5() {
           flexDirection={"column"}
           mb={5}
         >
-         <Text
+          <Text
             as="h4"
             sx={{
               fontSize: "1.25rem",
@@ -96,7 +87,8 @@ export default function Game5() {
               fontWeight: "500",
             }}
           >
-            Head to a path you were already past, but alas this one's not quite like the last.
+            Head to a path you were already past, but alas this one's not quite
+            like the last.
           </Text>
           {/* <p>Time Left: {timer}</p> */}
           <p>{`API: ${gameAPI}${btoa(userId)}`}</p>
@@ -109,15 +101,6 @@ export default function Game5() {
             flexDirection={"column"}
             width={"350px"}
           >
-            {/* <label htmlFor="submission">Flag</label>
-          <input
-            id="submission"
-            type="text"
-            value={submission}
-            onChange={(e) => {
-              setSubmission(e.target.value);
-            }}
-          /> */}
             <CustomForm
               id="submission"
               type="text"

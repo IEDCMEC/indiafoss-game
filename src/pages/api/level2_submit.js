@@ -12,19 +12,17 @@ export default async function handler(req, res) {
       });
     }
 
-    const { data, error } = await supabaseClient
-      .from("level2_players")
-      .insert([
-        {
-          name,
-          email,
-          phone: phoneNumber,
-          flag,
-        },
-      ]);
+    await supabaseClient.from("level2_players").insert([
+      {
+        name,
+        email,
+        phone: phoneNumber,
+        flag,
+      },
+    ]);
 
     return res.status(200).json({
-        message: "Submission Successful",
+      message: "Submission Successful",
     });
   } else {
     return res.status(405).json({

@@ -1,11 +1,9 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
 import generateUniqueFlag from "@/utils/UniqueFlag";
 
-
 export default function handler(req, res) {
-  const { userId } = req.query;
   const game5FlagStaticPart = process.env.STATIC_FIVE;
+
+  const { userId } = req.query;
 
   const uId = atob(userId);
 
@@ -14,7 +12,6 @@ export default function handler(req, res) {
   }
 
   const newFlag = generateUniqueFlag(uId);
-
 
   const flag = `${game5FlagStaticPart}${newFlag}}`;
 
