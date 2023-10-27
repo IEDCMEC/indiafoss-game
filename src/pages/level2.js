@@ -14,6 +14,15 @@ import toast from "react-hot-toast";
 import Footer from "@/Components/Footer";
 import { ContextProvider } from "@/contexts/ContextApi";
 
+// Footer
+import iedclogo from "@/assets/iedc mec.png";
+import fossmeclogo from "@/assets/fossmec.png";
+import Image from "next/image";
+import meclogo from "@/assets/mec logo.png";
+import { BsInstagram } from "react-icons/bs";
+import { RiTwitterXFill } from "react-icons/ri";
+import { FiFacebook, FiLinkedin, FiYoutube } from "react-icons/fi";
+
 function Level2Submission() {
   const { formData, setFormData, validationErrors, setValidationErrors } =
     useContext(ContextProvider);
@@ -187,7 +196,74 @@ function Level2Submission() {
           </Button>
         </form>
       </Box>
-      <Footer />
+      {/* Footer */}
+      <Box
+        display={"flex"}
+        alignItems={"center"}
+        justifyContent={"center"}
+        position="absolute"
+        backgroundColor="#c2d0dd"
+        bottom={"0"}
+        width={"100vw"}
+        minHeight={{ base: "50px", md: "100px" }}
+        mb={"0px"}
+      >
+        <Box
+          display={"flex"}
+          alignItems="center"
+          justifyContent={"space-between"}
+          width={{ base: "95vw", md: "85vw" }}
+          flexDirection={{ base: "column", md: "row" }}
+          height="100px"
+        >
+          <Link href="https://www.iedcmec.in/" isExternal>
+            <Image
+              src={iedclogo}
+              style={{ height: "50px", width: "calc(400/115 * 50px)" }}
+              alt=""
+            />
+          </Link>
+          <Box
+            display={"flex"}
+            alignItems="center"
+            justifyContent={"center"}
+            width={{ base: "95vw", md: "40vw" }}
+            flexDirection={"column"}
+            height={"100%"}
+            style={{
+              marginRight: "65px",
+            }}
+          >
+            <Link href="https://www.mec.ac.in/" isExternal>
+              <Image
+                src={meclogo}
+                style={{ height: "60px", width: "calc(340/170 * 60px)" }}
+                alt=""
+              />
+            </Link>
+            <p
+              style={{
+                fontSize: "1.3rem",
+                color: "black",
+              }}
+            >
+              Made with 💙 MEC
+            </p>
+          </Box>
+          <Link href="https://fossmec.netlify.app/" isExternal>
+            <Image
+              src={fossmeclogo}
+              style={{
+                height: "80px",
+                width: "100px",
+                backgroundColor: "#0c2445",
+                borderRadius: "5%",
+              }}
+              alt=""
+            />
+          </Link>
+        </Box>
+      </Box>
     </Box>
   );
 }
