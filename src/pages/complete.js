@@ -5,6 +5,7 @@ import Navbar from "@/Components/Navbar";
 import { useTimer } from "@/contexts/Timer";
 import axios from "axios";
 import Footer from "@/Components/Footer";
+import { PulseLoader } from "react-spinners";
 
 function Complete() {
   const router = useRouter();
@@ -12,11 +13,14 @@ function Complete() {
   const [name, setName] = useState("");
   const [score, setScore] = useState(0);
   const [time, setTime] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const fetchDetails = async () => {
     const userId = window.localStorage.getItem("TheGameUserId");
 
     const res = await axios.get(`/api/complete/${userId}`);
+
+    setLoading(false);
 
     if (res) {
       setName(res.data[0].name);
@@ -54,15 +58,28 @@ function Complete() {
           <Text fontSize="lg" mb={6} color="black">
             We appreciate your participation in our game.
           </Text>
-          <Text fontSize="xl" size="md" mb={4} color="black">
-            Name : <b>{name}</b>
-          </Text>
-          <Text fontSize="xl" size="md" mb={4} color="black">
-            Score : <b>{score}</b>
-          </Text>
-          <Text fontSize="xl" size="md" mb={4} color="black">
-            Time Taken : <b>{time} seconds</b>
-          </Text>
+          {loading ? (
+            <PulseLoader
+              color={"#094074"}
+              size={15}
+              style={{
+                marginBottom: "2rem",
+              }}
+            />
+          ) : (
+            <>
+              <Text fontSize="xl" size="md" mb={4} color="black">
+                Name : <b>{name}</b>
+              </Text>
+              <Text fontSize="xl" size="md" mb={4} color="black">
+                Score : <b>{score}</b>
+              </Text>
+              <Text fontSize="xl" size="md" mb={4} color="black">
+                Time Taken : <b>{time} seconds</b>
+              </Text>
+            </>
+          )}
+
           <Button
             backgroundColor="#094074"
             sx={{

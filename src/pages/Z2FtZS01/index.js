@@ -8,6 +8,7 @@ import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { PulseLoader } from "react-spinners";
 
 const gameAPI = "/api/Z2FtZS01/";
 const game6URL = "/Z2FtZS02";
@@ -18,20 +19,25 @@ export default function Game5() {
 
   const [userId, setUserId] = useState("");
   const [submission, setSubmission] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleFlagSubmit = async (e) => {
     e.preventDefault();
 
-    if(submission.length == 0){
+    if (submission.length == 0) {
       toast.error("Please enter the flag");
       return;
     }
-    
+
+    setLoading(true);
+
     const res = await axios.post("/api/check/game-5", {
       authToken: window.localStorage.getItem("token"),
       flag: submission,
       timeTaken: 600 - timer,
     });
+
+    setLoading(false);
 
     if (res.status == 200) {
       toast.success("Correct Flag 🚩!!");
@@ -96,10 +102,9 @@ export default function Game5() {
             Head to a path you were already past, but alas this one's not quite
             like the last.
           </Text>
-          {/* <p>Time Left: {timer}</p> */}
           <p>{`API: ${gameAPI}${btoa(userId)}`}</p>
         </Box>
-        <form onSubmit={handleFlagSubmit}>
+        <form onSubmit={!loading ? handleFlagSubmit : ""}>
           <Box
             display="flex"
             alignItems="center"
@@ -126,7 +131,7 @@ export default function Game5() {
               color="white"
               type="submit"
             >
-              Submit
+              {loading ? <PulseLoader color={"#ffffff"} size={10} /> : "Submit"}
             </Button>
           </Box>
         </form>
