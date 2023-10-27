@@ -21,6 +21,12 @@ export default function Game4() {
 
   const handleFlagSubmit = async (e) => {
     e.preventDefault();
+
+    if(submission.length == 0){
+      toast.error("Please enter the flag");
+      return;
+    }
+    
     const res = await axios.post("/api/check/game-4", {
       authToken: window.localStorage.getItem("token"),
       timeTaken: 600 - timer,
