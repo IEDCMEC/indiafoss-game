@@ -1,10 +1,8 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
 import generateUniqueFlag from "@/utils/UniqueFlag";
 
-const game4FlagStaticPart = "flag{dfsafewcvascd";
-
 export default function handler(req, res) {
+  const game4FlagStaticPart = process.env.STATIC_FOUR;
+
   const { userId } = req.query;
 
   if (req.method !== "GET") {

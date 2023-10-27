@@ -2,10 +2,10 @@
 
 import generateUniqueFlag from "@/utils/UniqueFlag";
 
-const game5FlagStaticPart = "flag{dfsafewcvascd";
 
 export default function handler(req, res) {
   const { userId } = req.query;
+  const game5FlagStaticPart = process.env.STATIC_FIVE;
 
   const uId = atob(userId);
 

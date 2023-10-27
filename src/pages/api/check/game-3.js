@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    const game3FlagStaticPart = "flag{dfsafewcvascd";
+    const game3FlagStaticPart = process.env.NEXT_PUBLIC_STATIC_THREE;
     const token = req.body.authToken;
     const flag = req.body.flag;
     const timeTaken = req.body.timeTaken;
