@@ -10,8 +10,9 @@ import CustomForm from "@/Components/CustomForm";
 import Footer from "@/Components/Footer";
 import { Text } from "@chakra-ui/react";
 import toast from "react-hot-toast";
-const game1FlagStaticPart = "flag{dskajfhsdhk";
-const game3FlagStaticPart = "flag{dfsafewcvascd";
+
+const game1FlagStaticPart = process.env.NEXT_PUBLIC_STATIC_ONE;
+const game3FlagStaticPart = process.env.NEXT_PUBLIC_STATIC_THREE;
 
 const gameScore = 1;
 const game2URL = "/Z2FtZS0z";
@@ -46,11 +47,9 @@ export default function Game1() {
       const flagg = `${game3FlagStaticPart}${newFlag}}`;
       document.cookie = `flag=${flagg};path=/`;
       router.replace(game2URL);
-    }
-    else if(res.status==204)
-    {
+    } else if (res.status == 204) {
       toast.error("Wrong Flag!!");
-      setSubmission("")
+      setSubmission("");
     }
   };
 

@@ -19,8 +19,6 @@ function Complete() {
 
     const res = await axios.get(`/api/complete/${userId}`);
 
-    console.log(res);
-
     if (res) {
       setName(res.data[0].name);
       setEmail(res.data[0].email);

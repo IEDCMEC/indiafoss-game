@@ -68,7 +68,6 @@ export default function Game6() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log(username, password);
     const hiddenPassword = process.env.NEXT_PUBLIC_URL_PASSWORD;
     if (username == hiddenPassword && password == hiddenPassword) {
       await fetch(`/next-page/id={${flag}}`);

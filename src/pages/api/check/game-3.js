@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    const game3FlagStaticPart = "flag{dfsafewcvascd";
+    const game3FlagStaticPart = process.env.NEXT_PUBLIC_STATIC_THREE;
     const token = req.body.authToken;
     const flag = req.body.flag;
     const timeTaken = req.body.timeTaken;
@@ -16,8 +16,6 @@ export default async function handler(req, res) {
       .eq("email", email);
 
     let newFlag = generateUniqueFlag(userId[0].id.toString());
-
-    console.log(`${game3FlagStaticPart}${newFlag}}`);
 
     if (flag != `${game3FlagStaticPart}${newFlag}}`) {
       return res.status(204).json({
@@ -31,7 +29,6 @@ export default async function handler(req, res) {
       .eq("id", userId[0].id);
 
     if (error) {
-      console.log(error);
       return res.status(500).json({
         error: "Something went wrong.",
       });

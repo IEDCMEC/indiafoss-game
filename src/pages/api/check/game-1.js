@@ -2,10 +2,10 @@ import { supabaseClient } from "@/utils/supabase";
 import jwt from "jsonwebtoken";
 import generateUniqueFlag from "@/utils/UniqueFlag";
 
-const game1FlagStaticPart = "flag{dskajfhsdhk";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
+    const game1FlagStaticPart = process.env.NEXT_PUBLIC_STATIC_ONE;
     const token = req.body.authToken;
     const flag = req.body.flag;
     const timeTaken = req.body.timeTaken;
@@ -29,7 +29,6 @@ export default async function handler(req, res) {
       .eq("id", userId[0].id);
 
     if (error) {
-      console.log(error);
       return res.status(500).json({
         error: "Something went wrong.",
       });

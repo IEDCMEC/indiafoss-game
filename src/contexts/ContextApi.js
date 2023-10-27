@@ -7,12 +7,14 @@ const ApiContext = ({children}) => {
         name: "",
         email: "",
         phoneNumber: "",
+        flag: "",
       });
     
       const [validationErrors, setValidationErrors] = useState({
         name: "",
         email: "",
         phoneNumber: "",
+        flag: "",
       });
   return (
     <ContextProvider.Provider value={{formData, setFormData, validationErrors, setValidationErrors}}>
