@@ -14,6 +14,7 @@ function Complete() {
   const [score, setScore] = useState(0);
   const [time, setTime] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [email, setEmail] = useState("");
 
   const fetchDetails = async () => {
     const userId = window.localStorage.getItem("TheGameUserId");
@@ -26,6 +27,7 @@ function Complete() {
       setName(res.data[0].name);
       setScore(res.data[0].score);
       setTime(res.data[0].time_taken);
+      setEmail(res.data[0].email);
     }
   };
 
@@ -74,9 +76,6 @@ function Complete() {
               <Text fontSize="xl" size="md" mb={4} color="black">
                 Score : <b>{score}</b>
               </Text>
-              <Text fontSize="xl" size="md" mb={4} color="black">
-                Time Taken : <b>{time} seconds</b>
-              </Text>
             </>
           )}
 
@@ -88,7 +87,13 @@ function Complete() {
               },
             }}
             color="white"
-            onClick={() => {
+            onClick={async () => {
+              axios.post("/api/sendEmail", {
+                toEmail: email,
+                secret: Buffer.from(
+                  process.env.NEXT_PUBLIC_MAIL_SECRET
+                ).toString("base64"),
+              });
               window.localStorage.removeItem("token");
               window.localStorage.removeItem("TheGameUserId");
               window.localStorage.setItem("progressing", false);

@@ -1,12 +1,11 @@
-import { Box, Icon } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import React from "react";
 import iedclogo from "@/assets/iedc mec.png";
 import Image from "next/image";
 import meclogo from "@/assets/mec logo.png";
-import InstagramIcon from "@/utils/InstagramIcon";
-import TwitterIcon from "@/utils/TwitterIcon";
-import MetaIcon from "@/utils/MetaIcon";
-import LinkedinIcon from "@/utils/LinkedinIcon";
+import { BsInstagram } from "react-icons/bs";
+import { RiTwitterXFill } from "react-icons/ri";
+import { FiFacebook, FiLinkedin, FiYoutube } from "react-icons/fi";
 
 const Footer = () => {
   return (
@@ -52,42 +51,39 @@ const Footer = () => {
             mb={"10px"}
             height={"30%"}
           >
-            <Icon
-              viewBox="0 0 200 200"
-              height={"1.4em"}
-              width="1.4em"
-              cursor={"pointer"}
-              color="black.500"
-            >
-              <InstagramIcon height={200} width={200} />
-            </Icon>
-            <Icon
-              viewBox="0 0 200 200"
-              height={"1.4em"}
-              width="1.4em"
-              cursor={"pointer"}
-              color="black.500"
-            >
-              <TwitterIcon height={200} width={200} />
-            </Icon>
-            <Icon
-              viewBox="0 0 200 200"
-              height={"1.4em"}
-              width="1.4em"
-              cursor={"pointer"}
-              color="black.500"
-            >
-              <MetaIcon height={200} width={200} />
-            </Icon>
-            <Icon
-              viewBox="0 0 200 200"
-              height={"1.4em"}
-              width="1.4em"
-              cursor={"pointer"}
-              color="black.500"
-            >
-              <LinkedinIcon height={200} width={200} />
-            </Icon>
+            <BsInstagram
+              onClick={() => {
+                window.open("https://www.instagram.com/iedcmec/", "_blank");
+              }}
+              style={{ height: "1.4em", width: "1.4em", cursor: "pointer" }}
+            />
+            <RiTwitterXFill
+              onClick={() => {
+                window.open("https://twitter.com/iedc_mec", "_blank");
+              }}
+              style={{ height: "1.4em", width: "1.4em", cursor: "pointer" }}
+            />
+            <FiFacebook
+              onClick={() => {
+                window.open("https://www.facebook.com/iedcmec/", "_blank");
+              }}
+              style={{ height: "1.4em", width: "1.4em", cursor: "pointer" }}
+            />
+            <FiLinkedin
+              onClick={() => {
+                window.open(
+                  "https://www.linkedin.com/company/iedcmec/",
+                  "_blank"
+                );
+              }}
+              style={{ height: "1.4em", width: "1.4em", cursor: "pointer" }}
+            />
+            <FiYoutube
+              onClick={() => {
+                window.open("https://www.youtube.com/@iedcmec8601", "_blank");
+              }}
+              style={{ height: "1.4em", width: "1.4em", cursor: "pointer" }}
+            />
           </Box>
           <p
             style={{

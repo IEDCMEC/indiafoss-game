@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import generateUniqueFlag from "@/utils/UniqueFlag";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Stack, Text } from "@chakra-ui/react";
 import CustomForm from "@/Components/CustomForm";
 import { Button } from "@chakra-ui/react";
 import { useTimer } from "@/contexts/Timer";
@@ -138,18 +138,38 @@ export default function Game6() {
                 setSubmission(e.target.value);
               }}
             />
-            <Button
-              backgroundColor="#094074"
-              sx={{
-                "&:hover": {
-                  backgroundColor: "#094074",
-                },
-              }}
-              color="white"
-              type="submit"
-            >
-              {loading ? <PulseLoader color={"#ffffff"} size={10} /> : "Submit"}
-            </Button>
+            <Stack direction="row" spacing={4} align="center">
+              <Button
+                backgroundColor="#094074"
+                sx={{
+                  "&:hover": {
+                    backgroundColor: "#094074",
+                  },
+                }}
+                color="white"
+                type="submit"
+              >
+                {loading ? (
+                  <PulseLoader color={"#ffffff"} size={10} />
+                ) : (
+                  "Submit"
+                )}
+              </Button>
+              <Button
+                backgroundColor="#701009"
+                sx={{
+                  "&:hover": {
+                    backgroundColor: "#701009",
+                  },
+                }}
+                onClick={() => {
+                  router.replace("/complete");
+                }}
+                color="white"
+              >
+                Finish
+              </Button>
+            </Stack>
           </Box>
         </form>
       </Box>

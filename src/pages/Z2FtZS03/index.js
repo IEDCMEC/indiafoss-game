@@ -117,7 +117,8 @@ export default function Game7() {
               fontWeight: "500",
             }}
           >
-            The final clue will take you to the summit. Search in the depths till u uncover the gold.
+            The final clue will take you to the summit. Search in the depths
+            till u uncover the gold.
           </Text>
         </Box>
         <form onSubmit={!loading && handleFlagSubmit}>
@@ -137,18 +138,38 @@ export default function Game7() {
                 setSubmission(e.target.value);
               }}
             />
-            <Button
-              backgroundColor="#094074"
-              sx={{
-                "&:hover": {
-                  backgroundColor: "#094074",
-                },
-              }}
-              color="white"
-              type="submit"
-            >
-              {loading ? <PulseLoader color={"#ffffff"} size={10} /> : "Submit"}
-            </Button>
+            <Stack direction="row" spacing={4} align="center">
+              <Button
+                backgroundColor="#094074"
+                sx={{
+                  "&:hover": {
+                    backgroundColor: "#094074",
+                  },
+                }}
+                color="white"
+                type="submit"
+              >
+                {loading ? (
+                  <PulseLoader color={"#ffffff"} size={10} />
+                ) : (
+                  "Submit"
+                )}
+              </Button>
+              <Button
+                backgroundColor="#701009"
+                sx={{
+                  "&:hover": {
+                    backgroundColor: "#701009",
+                  },
+                }}
+                onClick={() => {
+                  router.replace("/complete");
+                }}
+                color="white"
+              >
+                Finish
+              </Button>
+            </Stack>
           </Box>
         </form>
       </Box>
