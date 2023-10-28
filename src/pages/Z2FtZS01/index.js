@@ -34,7 +34,7 @@ export default function Game5() {
     const res = await axios.post("/api/check/game-5", {
       authToken: window.localStorage.getItem("token"),
       flag: submission,
-      timeTaken: 600 - timer,
+      timeTaken: 450 - timer,
     });
 
     setLoading(false);
