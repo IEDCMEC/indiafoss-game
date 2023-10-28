@@ -229,7 +229,6 @@ function Level2Submission() {
           </form>
         </Box>
       </Box>
-      <Footer />
     </Box>
   );
 }
