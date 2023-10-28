@@ -5,7 +5,9 @@ export default async function handler(req, res) {
     const { data, error } = await supabaseClient
       .from("players")
       .select("name, score, time_taken")
+      .gt("time_taken", 0)
       .order("score", { ascending: false })
+      .order("time_taken", { ascending: true })
       .limit(20);
 
     if (error) {
