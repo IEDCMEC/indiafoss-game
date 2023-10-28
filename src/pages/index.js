@@ -62,7 +62,7 @@ function Home() {
       window.localStorage.setItem("progressing", true);
       window.localStorage.setItem("token", res.data.token);
       window.localStorage.setItem("TheGameUserId", res.data.data[0].id);
-      window.localStorage.setItem("timer", 450);
+      window.localStorage.setItem("timer", 300);
       window.localStorage.setItem("data", JSON.stringify(formData));
 
       document.cookie = `TheGameUserId=${res.data.data[0].id};path=/`;

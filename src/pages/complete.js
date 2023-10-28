@@ -97,9 +97,9 @@ function Complete() {
               window.localStorage.removeItem("token");
               window.localStorage.removeItem("TheGameUserId");
               window.localStorage.setItem("progressing", false);
-              window.localStorage.setItem("timer", 450);
+              window.localStorage.setItem("timer", 300);
               window.localStorage.removeItem("data");
-              setSeconds(450);
+              setSeconds(300);
               router.replace("/");
             }}
           >
