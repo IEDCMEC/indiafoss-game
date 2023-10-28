@@ -8,7 +8,7 @@ export const useTimer = () => {
 };
 
 export const TimerProvider = ({ children }) => {
-  const [seconds, setSeconds] = useState(600);
+  const [seconds, setSeconds] = useState(450);
   const router = useRouter();
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export const TimerProvider = ({ children }) => {
   useEffect(() => {
     if (seconds < 1) {
       window.alert("Time's up!");
-      setSeconds(600);
+      setSeconds(450);
       window.localStorage.setItem("progressing", "false");
       router.replace("/complete");
     }
