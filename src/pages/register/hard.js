@@ -34,6 +34,18 @@ function Register() {
       setValidationErrors(newValidationErrors);
     } else {
       setLoading(true);
+
+      const r = await axios.post("/api/saveEmail", {
+        email: formData.email,
+        secret: Buffer.from(process.env.NEXT_PUBLIC_MAIL_SECRET).toString(
+          "base64"
+        ),
+      });
+
+      if (r.status !== 200) {
+        toast.error("Something went wrong");
+      }
+
       const res = await axios.post("/api/sendEmail", {
         toEmail: formData.email,
         secret: Buffer.from(process.env.NEXT_PUBLIC_MAIL_SECRET).toString(
