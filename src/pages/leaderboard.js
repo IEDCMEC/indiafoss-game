@@ -26,7 +26,7 @@ function Leaderboard() {
       padding={"4rem"}
     >
       <Text fontSize={"2.5rem"} fontWeight={"450"} color={"black"} mb={"50px"}>
-        Leaderboard
+        CTF Leaderboard
       </Text>
       <TableContainer>
         <Table
