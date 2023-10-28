@@ -117,8 +117,7 @@ export default function Game7() {
               fontWeight: "500",
             }}
           >
-            The final clue will take you to the summit. Search in the depths
-            till u uncover the gold.
+            The final key is in the front of your eyes, 3 letters on a paper to be more precise.
           </Text>
         </Box>
         <form onSubmit={!loading && handleFlagSubmit}>
