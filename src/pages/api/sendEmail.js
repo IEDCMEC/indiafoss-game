@@ -15,15 +15,39 @@ export default async function handler(req, res) {
     const mailHtml = `
     <html>
     <body>
-    <p>Heyy Participant,</p>
-    <p>I appreciate your participation in the previous test and would like to invite you to the Hard Level Test.</p>
-    <p>You can access it through this link: <a href="https://game.iedcmec.in/level2">Click Here</a></p>
-    <p>The test is available until 29th October, 12 p.m.</p>
-    <p>Please feel free to contact our support team at <a href="mailto:iedcmec@mec.ac.in">iedcmec@mec.ac.in</a> if you have any questions or encounter issues.</p>
-    <p>Thank you for your participation, and good luck!</p>
-    <br/>
-    <p>Best regards,</p>
-    <p><b>IEDC MEC</b></p>
+      <p>Heyy Participant,</p>
+      <p>
+        We appreciate your participation in the previous test and would like to
+        invite you to the Hard Level Test.
+      </p>
+      <p>
+        You can access it through this link:
+        <a href="https://game.iedcmec.in/level2">Click Here</a>
+      </p>
+      <p>The test is available until 29th October, 12 p.m.</p>
+      <p>
+        Please feel free to contact our support team at
+        <a href="mailto:iedcmec@mec.ac.in">iedcmec@mec.ac.in</a> if you have any
+        questions or encounter issues.
+      </p>
+      <p>Thank you for your participation, and good luck!</p>
+      <br />
+      <p>Best regards,</p>
+      <div
+        style="
+          height: 20px;
+          width: 85px;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        "
+      >
+        <img
+          height="100px"
+          src="https://avatars.githubusercontent.com/u/60802781?s=400&u=8695e97712e3738590b0749da3bf61a4a99b6eb7"
+        />
+      </div>
     </body>
     </html>
   `;
