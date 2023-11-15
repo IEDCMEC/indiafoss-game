@@ -44,7 +44,7 @@ export default function Game6() {
     const res = await axios.post("/api/check/game-6", {
       authToken: window.localStorage.getItem("token"),
       flag: submission,
-      timeTaken: 300 - timer,
+      timeTaken: 600 - timer,
     });
 
     setLoading(false);
