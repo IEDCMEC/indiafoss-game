@@ -36,7 +36,7 @@ export default function Game7() {
     const res = await axios.post("/api/check/game-7", {
       authToken: window.localStorage.getItem("token"),
       flag: submission,
-      timeTaken: 300 - timer,
+      timeTaken: 600 - timer,
     });
 
     setLoading(false);

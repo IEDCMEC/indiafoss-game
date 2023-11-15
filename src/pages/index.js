@@ -16,6 +16,7 @@ import toast from "react-hot-toast";
 import Footer from "@/Components/Footer";
 import { ContextProvider } from "@/contexts/ContextApi";
 import { PulseLoader } from "react-spinners";
+import Link from "next/link";
 
 function Home() {
   const router = useRouter();
@@ -62,7 +63,7 @@ function Home() {
       window.localStorage.setItem("progressing", true);
       window.localStorage.setItem("token", res.data.token);
       window.localStorage.setItem("TheGameUserId", res.data.data[0].id);
-      window.localStorage.setItem("timer", 300);
+      window.localStorage.setItem("timer", 600);
       window.localStorage.setItem("data", JSON.stringify(formData));
 
       document.cookie = `TheGameUserId=${res.data.data[0].id};path=/`;
@@ -180,6 +181,7 @@ function Home() {
             </Button>
           </form>
         </Box>
+        <Link href="/level2" ><Text fontSize={"1.4rem"} color={"#701009"}>Try Level 2</Text></Link>
         <Footer />
       </Box>
     </>

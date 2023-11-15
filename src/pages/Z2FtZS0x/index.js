@@ -43,7 +43,7 @@ export default function Game1() {
     const res = await axios.post("/api/check/game-1", {
       authToken: window.localStorage.getItem("token"),
       userId: window.localStorage.getItem("TheGameUserId"),
-      timeTaken: 300 - timer,
+      timeTaken: 600 - timer,
       flag: submission,
     });
 

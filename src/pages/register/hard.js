@@ -46,17 +46,17 @@ function Register() {
         toast.error("Something went wrong");
       }
 
-      const res = await axios.post("/api/sendEmail", {
-        toEmail: formData.email,
-        secret: Buffer.from(process.env.NEXT_PUBLIC_MAIL_SECRET).toString(
-          "base64"
-        ),
-      });
-      setLoading(false);
-      if (res.status === 200) {
-        toast.success("Email sent successfully!");
-        setFormData({ email: "" });
-      }
+      // const res = await axios.post("/api/sendEmail", {
+      //   toEmail: formData.email,
+      //   secret: Buffer.from(process.env.NEXT_PUBLIC_MAIL_SECRET).toString(
+      //     "base64"
+      //   ),
+      // });
+      // setLoading(false);
+      // if (res.status === 200) {
+      //   toast.success("Email sent successfully!");
+      //   setFormData({ email: "" });
+      // }
     }
   };
 
