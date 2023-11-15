@@ -88,22 +88,22 @@ function Complete() {
             }}
             color="white"
             onClick={async () => {
-              axios.post("/api/sendEmail", {
-                toEmail: email,
-                secret: Buffer.from(
-                  process.env.NEXT_PUBLIC_MAIL_SECRET
-                ).toString("base64"),
-              });
+              // axios.post("/api/sendEmail", {
+              //   toEmail: email,
+              //   secret: Buffer.from(
+              //     process.env.NEXT_PUBLIC_MAIL_SECRET
+              //   ).toString("base64"),
+              // });
               window.localStorage.removeItem("token");
               window.localStorage.removeItem("TheGameUserId");
               window.localStorage.setItem("progressing", false);
               window.localStorage.setItem("timer", 300);
               window.localStorage.removeItem("data");
               setSeconds(300);
-              router.replace("/");
+              router.replace("/level2");
             }}
           >
-            Return to Homepage
+            Try Level 2
           </Button>
         </Box>
         <Footer />
